@@ -99,10 +99,37 @@ try {
 };
 
   return (
+  <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
 
-    <div className="min-h-screen bg-gray-100 py-10 px-6">
+    {/* Header */}
 
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8">
+    <div className="border-b bg-white/80 backdrop-blur-md">
+
+      <div className="max-w-7xl mx-auto px-8 py-8">
+
+        <span className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
+          Certificate Management
+        </span>
+
+        <h1 className="text-5xl font-black text-slate-900 mt-5">
+          Issue New Certificate
+        </h1>
+
+        <p className="text-gray-600 mt-3 text-lg">
+          Fill in the student details below to generate a secure digital certificate.
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* Content */}
+
+    <div className="max-w-7xl mx-auto px-8 py-12 grid lg:grid-cols-5 gap-10">
+
+      {/* Left */}
+
+      <div className="lg:col-span-3">
 
         <CertificateForm
           formData={formData}
@@ -110,6 +137,12 @@ try {
           handleSubmit={handleSubmit}
           errors={errors}
         />
+
+      </div>
+
+      {/* Right */}
+
+      <div className="lg:col-span-2 sticky top-28 h-fit">
 
         <CertificateLivePreview
           formData={formData}
@@ -119,7 +152,8 @@ try {
 
     </div>
 
-  );
+  </div>
+);
 }
 
 export default IssueCertificate;

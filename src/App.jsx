@@ -11,8 +11,20 @@ import Register from "./pages/Register";
 import IssueCertificate from "./pages/IssueCertificate";
 import AdminDashboard from "./pages/AdminDashboard";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 function App() {
+  useEffect(() => {
+  AOS.init({
+    duration: 900,
+    once: true,
+    easing: "ease-in-out",
+  });
+}, []);
+
   return (
     <Routes>
 
@@ -38,11 +50,10 @@ function App() {
 
       </Route>
 
-      {/* Login without Navbar */}
 
-      <Route path="/login" element={<Login />} />
+      
 
-       </Routes>
+    </Routes>
   );
 }
 

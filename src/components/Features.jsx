@@ -1,59 +1,101 @@
 import FeatureCard from "./FeatureCard";
+import {
+  ShieldCheck,
+  QrCode,
+  FileCheck,
+  Database,
+  BarChart3,
+  Globe,
+} from "lucide-react";
 
 const features = [
   {
-    icon: "🔒",
+    icon: ShieldCheck,
     title: "Secure Verification",
     description:
-      "Certificates are protected using unique IDs and QR verification.",
+      "Every certificate is protected with unique IDs and secure verification, ensuring authenticity and preventing tampering.",
   },
   {
-    icon: "⚡",
-    title: "Fast Validation",
+    icon: QrCode,
+    title: "QR Authentication",
     description:
-      "Verify certificates within seconds from anywhere.",
+      "Generate dynamic QR codes for every certificate so anyone can instantly verify it online.",
   },
   {
-    icon: "📱",
-    title: "QR Code Support",
+    icon: FileCheck,
+    title: "Instant Certificate Issuing",
     description:
-      "Every certificate includes a secure QR Code.",
+      "Create professional digital certificates within seconds with a streamlined workflow.",
   },
   {
-    icon: "📄",
-    title: "Digital Certificates",
+    icon: Database,
+    title: "Cloud Storage",
     description:
-      "Issue professional digital certificates instantly.",
+      "Store certificates securely in MongoDB with quick retrieval and reliable backup.",
   },
   {
-    icon: "📊",
-    title: "Analytics",
+    icon: BarChart3,
+    title: "Analytics Dashboard",
     description:
-      "Track verification history and certificate usage.",
+      "Track issued certificates, monitor verification activity, and manage records from one place.",
   },
   {
-    icon: "🌍",
-    title: "Global Access",
+    icon: Globe,
+    title: "Accessible Anywhere",
     description:
-      "Certificates can be verified anywhere in the world.",
+      "Certificates can be verified securely from anywhere in the world using any device.",
   },
 ];
 
 function Features() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="relative py-28 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
 
-      <div className="max-w-7xl mx-auto px-8">
+      {/* Background Decoration */}
 
-        <h2 className="text-5xl font-bold text-center mb-4">
-          Why Choose Our Platform?
+      <div className="absolute -left-32 top-20 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl"></div>
+
+      <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-indigo-200/30 blur-3xl"></div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
+
+        {/* Small Badge */}
+
+        <div className="flex justify-center">
+
+          <span className="px-5 py-2 rounded-full bg-blue-100 text-blue-700 font-semibold">
+
+            Platform Features
+
+          </span>
+
+        </div>
+
+        {/* Heading */}
+
+        <h2 className="mt-6 text-center text-5xl md:text-6xl font-black text-slate-900">
+
+          Everything You Need
+          <br />
+          to Manage Certificates
+
         </h2>
 
-        <p className="text-center text-gray-600 mb-16">
-          Everything you need to issue and verify certificates.
+        {/* Description */}
+
+        <p className="mt-6 max-w-3xl mx-auto text-center text-lg text-slate-600 leading-8">
+
+          CertifyPro provides institutions with a complete platform for
+          issuing, managing, verifying and securing digital certificates
+          using modern cloud technologies.
+
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Cards */}
+
+        <div 
+        data-aos="fade-up"
+        className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-20">
 
           {features.map((feature, index) => (
             <FeatureCard

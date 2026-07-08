@@ -4,6 +4,7 @@ import API from "../api/certificateApi";
 function AdminDashboard() {
   const [certificates, setCertificates] = useState([]);
   const [search, setSearch] = useState("");
+  const [editingCertificate, setEditingCertificate] = useState(null);
 
   useEffect(() => {
     fetchCertificates();
@@ -42,6 +43,26 @@ const handleDelete = async (id) => {
     console.error(error);
 
     alert("❌ Failed to Delete Certificate");
+  }
+};
+
+const handleUpdate = async () => {
+  try {
+    await API.put(
+      `/certificates/${editingCertificate._id}`,
+      editingCertificate
+    );
+
+    alert("✅ Certificate Updated Successfully");
+
+    setEditingCertificate(null);
+
+    fetchCertificates();
+
+  } catch (error) {
+    console.error(error);
+
+    alert("❌ Failed to Update Certificate");
   }
 };
 
@@ -133,16 +154,24 @@ const handleDelete = async (id) => {
                   {certificate.grade}
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 flex gap-4">
 
                     <button
-                        onClick={() => handleDelete(certificate._id)}
-                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
-                    >
-    Delete
-  </button>
+                        onClick={() => setEditingCertificate(certificate)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+                            Edit
+                    </button>
 
-</td>
+                   
+                    <button
+                         onClick={() => handleDelete(certificate._id)}
+                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                          
+                        Delete
+
+                    </button>
+
+                </td>
 
               </tr>
 
@@ -153,6 +182,65 @@ const handleDelete = async (id) => {
         </table>
 
       </div>
+
+      {editingCertificate && (
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+
+    <div className="bg-white rounded-2xl p-8 w-[500px]">
+
+      <h2 className="text-2xl font-bold mb-6">
+        Edit Certificate
+      </h2>
+
+      <input
+        type="text"
+        value={editingCertificate.studentName}
+        onChange={(e) =>
+          setEditingCertificate({
+            ...editingCertificate,
+            studentName: e.target.value,
+          })
+        }
+        className="w-full border p-3 rounded-lg mb-4"
+      />
+
+      <input
+        type="text"
+        value={editingCertificate.course}
+        onChange={(e) =>
+          setEditingCertificate({
+            ...editingCertificate,
+            course: e.target.value,
+          })
+        }
+        className="w-full border p-3 rounded-lg mb-6"
+      />
+
+      <div className="flex justify-end gap-4">
+
+        <button
+          onClick={() => setEditingCertificate(null)}
+          className="bg-gray-400 text-white px-5 py-2 rounded-lg"
+        >
+          Cancel
+        </button>
+
+        <button
+        
+  onClick={handleUpdate}
+  className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
+>
+ 
+    
+          Save Changes
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
 
     </div>
   );

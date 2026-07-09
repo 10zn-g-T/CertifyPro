@@ -85,6 +85,12 @@ function Hero() {
             >
               Verify Certificate
             </Link>
+ <Link
+    to="/admin"
+    className="  px-8 py-4 border-2  font-semibold text-black rounded-xl  hover:bg-black hover:text-white transition duration-300"
+  >
+    Admin Dashboard
+  </Link>
 
           </div>
 <div className="grid grid-cols-3 gap-8 mt-14">

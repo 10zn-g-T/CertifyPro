@@ -8,9 +8,14 @@ import {
   Database,
 } from "lucide-react";
 
+
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 min-h-screen flex items-center pt-24">
+    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-slate-50 min-h-[92vh] flex items-center pt-36 pb-20">
+{/*background effect*/}
+<div className="absolute top-20 left-20 w-72 h-72 bg-blue-200 rounded-full blur-[140px] opacity-30"></div>
+
+<div className="absolute bottom-10 right-10 w-80 h-80 bg-indigo-200 rounded-full blur-[170px] opacity-25"></div>
 
       {/* Background Blur */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl"></div>
@@ -57,9 +62,9 @@ function Hero() {
 
           <p className="mt-8 text-lg text-slate-600 leading-8 max-w-xl">
 
-            Create secure digital certificates with QR verification,
-            cloud storage, instant PDF generation and a centralized
-            dashboard built for modern institutions.
+            Securely issue, manage and verify digital certificates with
+            QR authentication, unique certificate IDs, cloud storage,
+            and instant PDF generation.
 
           </p>
 
@@ -82,7 +87,36 @@ function Hero() {
             </Link>
 
           </div>
+<div className="grid grid-cols-3 gap-8 mt-14">
 
+  <div>
+    <h2 className="text-3xl font-bold text-blue-600">
+      500+
+    </h2>
+    <p className="text-gray-500">
+      Institutions
+    </p>
+  </div>
+
+  <div>
+    <h2 className="text-3xl font-bold text-blue-600">
+      12K+
+    </h2>
+    <p className="text-gray-500">
+      Certificates
+    </p>
+  </div>
+
+  <div>
+    <h2 className="text-3xl font-bold text-blue-600">
+      99.9%
+    </h2>
+    <p className="text-gray-500">
+      Accuracy
+    </p>
+  </div>
+
+</div>
           {/* Trust Badges */}
 
           <div className="flex flex-wrap gap-8 mt-12">
@@ -127,7 +161,7 @@ function Hero() {
           <img
             src={heroImage}
             alt="Hero"
-            className="w-full max-w-xl"
+            className="w-full max-w-xl drop-shadow-2xl hover:scale-105 duration-500"
           />
 
           {/* Floating Certificate */}

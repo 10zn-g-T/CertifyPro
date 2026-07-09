@@ -169,19 +169,27 @@ DELETE /api/certificates/:id
 
 ### 🏠 Home Page
 
-![Home](./screenshots/home.png)
+<p align="center">
+  <img src="./screenshots/home.png" width="800">
+</p>
 
 ### 🎓 Issue Certificate
 
-![Issue Certificate](./screenshots/issue.png)
+<p align="center">
+  <img src="./screenshots/issue.png" width="800">
+</p>
 
 ### 🔍 Verify Certificate
 
-![Verify Certificate](./screenshots/verify.png)
+<p align="center">
+  <img src="./screenshots/verify.png" width="800">
+</p>
 
 ### 📊 Admin Dashboard
 
-![Admin Dashboard](./screenshots/dashboard.png)
+<p align="center">
+  <img src="./screenshots/dashboard.png" width="800">
+</p>
 
 ---
 

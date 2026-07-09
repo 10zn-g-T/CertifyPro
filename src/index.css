@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+
+.certificate-name {
+  font-family: "Parisienne", cursive;
+}

@@ -15,6 +15,7 @@ export const issueCertificate = async (req, res) => {
     });
   }
 };
+
 export const verifyCertificate = async (req, res) => {
   try {
     const certificate = await Certificate.findOne({
@@ -40,6 +41,7 @@ export const verifyCertificate = async (req, res) => {
     });
   }
 };
+
 export const getAllCertificates = async (req, res) => {
   try {
     const certificates = await Certificate.find().sort({
@@ -61,6 +63,7 @@ export const getAllCertificates = async (req, res) => {
 
   }
 };
+
 export const deleteCertificate = async (req, res) => {
   try {
     const certificate = await Certificate.findById(req.params.id);
@@ -86,6 +89,7 @@ export const deleteCertificate = async (req, res) => {
     });
   }
 };
+
 export const updateCertificate = async (req, res) => {
   try {
     const certificate = await Certificate.findByIdAndUpdate(

@@ -142,12 +142,13 @@ try {
 
       {/* Right */}
 
-      <div className="lg:col-span-2 sticky top-28 h-fit">
+      <div className="lg:col-span-2">
+         <div className="sticky top-10">
 
-        <CertificateLivePreview
-          formData={formData}
-        />
-
+          <CertificateLivePreview
+            formData={formData}
+          />
+          </div>
       </div>
 
     </div>

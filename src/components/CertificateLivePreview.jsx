@@ -1,7 +1,10 @@
 import QRCode from "react-qr-code";
+import { Award } from "lucide-react";
 import { useRef } from "react";
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
+import CertificateCorner from "./CertificateCorner";
+import CertificateSeal from "./CertificateSeal";
 
 function CertificateLivePreview({ formData }) {
       const certificateRef = useRef();
@@ -34,101 +37,232 @@ function CertificateLivePreview({ formData }) {
     console.error(error);
   }
 };
+
+const formattedDate = formData.issueDate
+  ? new Date(formData.issueDate).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    })
+  : "Not Selected";
   return (
-    <div 
-    ref={certificateRef}
-    className="bg-white rounded-2xl shadow-xl p-10 sticky top-24">
+  <>
+    <div
+    
+      ref={certificateRef}
+      className="relative bg-gradient-to-br from-white via-slate-50 to-blue-50 rounded-3xl shadow-2xl overflow-hidden border-[10px] border-blue-600"
+    >
+      <CertificateCorner position="tl" />
+<CertificateCorner position="tr" />
+<CertificateCorner position="br" />
+<CertificateCorner position="bl" />
 
-      <h2 className="text-3xl font-bold text-blue-600 mb-8">
-        Live Certificate Preview
-      </h2>
+{/* Decorative Background Pattern */}
 
-      <div className="space-y-5">
+<div className="absolute inset-0 opacity-5 pointer-events-none">
 
-        <div>
-          <p className="text-gray-500">Certificate ID</p>
-          <h3 className="font-bold text-lg">
-            {formData.certificateId}
-          </h3>
-        </div>
+  <div className="absolute top-10 left-10 w-56 h-56 rounded-full border-[18px] border-blue-500"></div>
 
-        <div>
-          <p className="text-gray-500">Student Name</p>
-          <h3 className="font-semibold">
-            {formData.studentName || "Student Name"}
-          </h3>
-        </div>
+  <div className="absolute bottom-16 right-10 w-44 h-44 rounded-full border-[14px] border-indigo-500"></div>
 
-        <div>
-          <p className="text-gray-500">Student Email</p>
-          <h3>
-            {formData.studentEmail || "student@email.com"}
-          </h3>
-        </div>
-
-        <div>
-          <p className="text-gray-500">Course</p>
-          <h3>
-            {formData.course || "Course Name"}
-          </h3>
-        </div>
-
-        <div>
-          <p className="text-gray-500">Institution</p>
-          <h3>
-            {formData.institution || "Institution"}
-          </h3>
-        </div>
-
-        <div>
-          <p className="text-gray-500">Issue Date</p>
-          <h3>
-            {formData.issueDate || "Not Selected"}
-          </h3>
-        </div>
-
-        <div>
-          <p className="text-gray-500">Grade</p>
-          <h3>
-            {formData.grade || "Not Assigned"}
-          </h3>
-        </div>
-
-        <div>
-          <p className="text-gray-500">Description</p>
-          <p className="text-gray-700">
-            {formData.description || "Certificate Description"}
-          </p>
-        </div>
-
-        <div className="pt-6 border-t">
-
-  <p className="text-gray-500 mb-4 font-medium">
-    QR Code
-  </p>
-
-  <div className="flex justify-center bg-white p-4 rounded-xl">
-
-    <QRCode
-      value={formData.certificateId || "CERTIFICATE"}
-      size={150}
-    />
-
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[180px] font-black text-slate-300 rotate-[-30deg]">
+    CERTIFYPRO
   </div>
 
 </div>
 
-    <button
-  onClick={downloadPDF}
-  className="mt-8 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold transition"
->
-  Download Certificate PDF
-</button>
+      
+<div className="relative z-10">
+
+      {/* Header */}
+
+     <div className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-blue-700 to-indigo-700 text-white text-center py-10">
+
+<div className="absolute inset-0 opacity-10">
+
+  <div className="absolute w-72 h-72 bg-white rounded-full -top-20 -left-20"></div>
+
+  <div className="absolute w-72 h-72 bg-white rounded-full -bottom-20 -right-20"></div>
+
+</div>
+
+        <h1 className="text-4xl font-black tracking-wide">
+          CERTIFYPRO
+        </h1>
+
+        <p className="uppercase tracking-[6px] mt-2 text-blue-100">
+          Certificate of Achievement
+          <div className="w-50 h-1 bg-gradient-to-r from-blue-500 to-indigo-400 mx-auto rounded-full mt-5"></div>
+        </p>
+
+      </div>
+  
+      {/* Certificate */}
+
+      <div className="relative p-10 overflow-hidden">
+
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+
+        <h1 className="text-[120px] font-black text-blue-100 opacity-20 rotate-[-25deg]">
+
+         CERTIFYPRO
+
+        </h1>
 
       </div>
 
+<div className="relative z-10">
+
+        <p className="text-center text-gray-500">
+          This certificate is proudly presented to
+        </p>
+
+        <h2 className="certificate-name text-center text-5xl text-blue-700 mt-8">
+
+          {formData.studentName || "Student Name"}
+
+        </h2>
+
+        <p className="text-center mt-8 text-gray-500">
+          For successfully completing
+        </p>
+
+        <h3 className="text-center text-3xl font-bold mt-4">
+
+          {formData.course || "Course Name"}
+
+        </h3>
+
+        <div className="flex justify-center my-10">
+    <CertificateSeal />
+</div>
+<p className="text-center uppercase tracking-[6px] text-gray-500 text-sm">
+    Official Digital Certificate
+</p>
+
+        <div className="grid grid-cols-2 gap-8 mt-14">
+
+          <div>
+
+            <p className="uppercase tracking-widest text-xs text-slate-500">
+              Institution
+            </p>
+
+            <h4 className="font-semibold mt-2">
+
+              {formData.institution || "Institution"}
+
+            </h4>
+
+          </div>
+
+          <div>
+
+            <p className="uppercase tracking-widest text-xs text-slate-500">
+              Grade
+            </p>
+
+            <h4 className="font-semibold mt-2">
+
+              {formData.grade || "Not Assigned"}
+
+            </h4>
+
+          </div>
+
+          <div>
+
+            <p className="uppercase tracking-widest text-xs text-slate-500">
+              Issue Date
+            </p>
+
+            <h4 className="font-semibold mt-2">
+
+              {formattedDate}
+
+            </h4>
+
+          </div>
+
+          <div>
+
+            <p className="uppercase tracking-widest text-xs text-slate-500">
+              Certificate ID
+            </p>
+
+            <h4 className="font-semibold mt-2">
+
+              {formData.certificateId}
+
+            </h4>
+
+          </div>
+
+        </div>
+
+        {/* Footer */}
+
+        <div className="flex justify-between items-end mt-16">
+
+          <div>
+
+            <div className="border-t-2 border-gray-500 w-42"></div>
+              <p className="text-3xl font-serif text-blue-400 -mt-9">
+                T. Tamang
+              </p>
+            <p className="mt-2 text-sm">
+              Authorized Signature
+            </p>
+
+          </div>
+
+          <div className="bg-gradient-to-br from-slate-50 to-white border rounded-2xl p-5 shadow-lg">
+
+            <QRCode
+              value={formData.certificateId}
+              size={90}
+            />
+            <p className="text-center text-xs text-gray-500 mt-2">
+              Scan to Verify
+          </p>
+
+          </div>
+
+        </div>
+
+<div className="border-t mt-10 pt-6">
+
+  <p className="text-center text-gray-500 text-sm">
+
+    Certificate No.
+
+  </p>
+
+  <h3 className="text-center font-black tracking-[4px] text-blue-700 mt-2">
+
+    {formData.certificateId}
+
+  </h3>
+
+</div>
+
+        </div>
+
+      </div>
+</div>
     </div>
-  );
+
+    {/* Download Button */}
+
+    <button
+      onClick={downloadPDF}
+      className="w-full mt-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-bold shadow-xl transition-all duration-300 hover:scale-[1.02]"
+    >
+      Download Certificate PDF
+    </button>
+
+  </>
+);
 }
 
 export default CertificateLivePreview;

@@ -21,127 +21,125 @@ function Register() {
 
   // Form Submit
   const handleSubmit = (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const newErrors = {};
+        const newErrors = {};
 
-    // Validate Name
-    if (!name.trim()) {
-      newErrors.name = "Full Name is required";
-    }
+        // Validate Name
+        if (!name.trim()) {
+            newErrors.name = "Full Name is required";
+        }
 
-    // Validate Email
-    if (!email.trim()) {
-      newErrors.email = "Email is required";
-    }else if (!/\S+@\S+\.\S+/.test(email)) {
-        newErrors.email = "Please enter a valid email address";
-     }
+        // Validate Email
+        if (!email.trim()) {
+            newErrors.email = "Email is required";
+        }else if (!/\S+@\S+\.\S+/.test(email)) {
+            newErrors.email = "Please enter a valid email address";
+        }
 
-    // Validate Password
-    if (password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
-    }
+        // Validate Password
+        if (password.length < 8) {
+            newErrors.password = "Password must be at least 8 characters";
+        }
 
-    // Validate Confirm Password
-    if (password !== confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
-    }
+        // Validate Confirm Password
+        if (password !== confirmPassword) {
+            newErrors.confirmPassword = "Passwords do not match";
+        }
 
-    // Update Errors
-    setErrors(newErrors);
+        // Update Errors
+        setErrors(newErrors);
 
-    // If No Errors
-   if (Object.keys(newErrors).length === 0) {
+        // If No Errors
+        if (Object.keys(newErrors).length === 0) {
 
-  setSuccess("🎉 Registration Successful!");
+            setSuccess("🎉 Registration Successful!");
 
-  setName("");
-  setEmail("");
-  setPassword("");
-  setConfirmPassword("");
+            setName("");
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
 
-  setErrors({});
+            setErrors({});
 
-  console.log({
-    name,
-    email,
-    password,
-    confirmPassword,
-  });
-}
-  };
+            console.log({
+                name,
+                email,
+                password,
+                confirmPassword,
+            });
+        }
+    };
 
-  return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center px-4">
+    return (
+        <div className="min-h-screen bg-gray-100 flex justify-center items-center px-4">
 
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
 
-        <h1 className="text-4xl font-bold text-center text-blue-600 mb-2">
-          Create Account
-        </h1>
+                <h1 className="text-4xl font-bold text-center text-blue-600 mb-2">
+                    Create Account
+                </h1>
 
-        <p className="text-center text-gray-500 mb-8">
-          Join CertifyPro to manage certificates securely.
-        </p>
+                <p className="text-center text-gray-500 mb-8">
+                    Join CertifyPro to manage certificates securely.
+                </p>
 
-        {success && (
-  <div className="mb-6 rounded-lg bg-green-100 border border-green-400 text-green-700 p-4">
-    {success}
-  </div>
-)}
+                {success && (
+                    <div className="mb-6 rounded-lg bg-green-100 border border-green-400 text-green-700 p-4">
+                        {success}
+                    </div>
+                )}
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
 
-          {/* Full Name */}
-          <Input
-            label="Full Name"
-            placeholder="Enter your full name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            error={errors.name}
-         />
-          {/* Email */}
-          
-           <Input
-  label="Email Address"
-  type="email"
-  placeholder="Enter your email"
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-  error={errors.email}
-/>
+                    {/* Full Name */}
+                    <Input
+                        label="Full Name"
+                        placeholder="Enter your full name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        error={errors.name}
+                    />
+                
+                    {/* Email */}
+                    <Input
+                        label="Email Address"
+                        type="email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        error={errors.email}
+                    />
+   
+                    {/* Password */}
+                    <PasswordInput
+                        label="Password"
+                        placeholder="Create a password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        error={errors.password}
+                    />
 
-            
+                    {/* Confirm Password */}
+                    <PasswordInput
+                        label="Confirm Password"
+                        placeholder="Confirm your password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        error={errors.confirmPassword}
+                    />
 
-          {/* Password */}
-         <PasswordInput
-  label="Password"
-  placeholder="Create a password"
-  value={password}
-  onChange={(e) => setPassword(e.target.value)}
-  error={errors.password}
-/>
+                    {/* Submit Button */}
+                    <Button
+                        text="Create Account"
+                        type="submit"
+                    />
+                </form>
 
-          {/* Confirm Password */}
-          <PasswordInput
-  label="Confirm Password"
-  placeholder="Confirm your password"
-  value={confirmPassword}
-  onChange={(e) => setConfirmPassword(e.target.value)}
-  error={errors.confirmPassword}
-/>
+            </div>
 
-          {/* Submit Button */}
-          <Button
-             text="Create Account"
-             type="submit"
-           />
-        </form>
-
-      </div>
-
-    </div>
-  );
+        </div>
+    );
 }
 
 export default Register

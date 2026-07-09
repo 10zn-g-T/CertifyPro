@@ -17,13 +17,13 @@ import "aos/dist/aos.css";
 
 
 function App() {
-  useEffect(() => {
-  AOS.init({
-    duration: 900,
-    once: true,
-    easing: "ease-in-out",
-  });
-}, []);
+    useEffect(() => {
+    AOS.init({
+      duration: 900,
+      once: true,
+      easing: "ease-in-out",
+    });
+  }, []);
 
   return (
     <Routes>
@@ -49,10 +49,6 @@ function App() {
         <Route path="/login" element={<Login />} />
 
       </Route>
-
-
-      
-
     </Routes>
   );
 }

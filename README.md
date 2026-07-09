@@ -169,19 +169,19 @@ DELETE /api/certificates/:id
 
 ### 🏠 Home Page
 
-_Add a screenshot here_
+![Home](./screenshots/home.png)
 
 ### 🎓 Issue Certificate
 
-_Add a screenshot here_
+![Issue Certificate](./screenshots/issue.png)
 
 ### 🔍 Verify Certificate
 
-_Add a screenshot here_
+![Verify Certificate](./screenshots/verify.png)
 
 ### 📊 Admin Dashboard
 
-_Add a screenshot here_
+![Admin Dashboard](./screenshots/dashboard.png)
 
 ---
 

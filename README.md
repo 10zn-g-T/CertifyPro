@@ -1,23 +1,231 @@
-# 🎓 CertifyPro - Full Stack Certificate Generation System
+# 🛡️ CertifyPro - Online Certificate Verification System
 
-CertifyPro is a secure full-stack web application designed to streamline, generate, and manage digital certificates efficiently.
+CertifyPro is a full-stack MERN web application that enables institutions to issue, manage, and verify digital certificates securely. The platform helps reduce certificate forgery by providing unique Certificate IDs and an online verification system.
 
-## 🛠️ Tech Stack & Architecture
-- **Frontend:** React.js (built with Vite for lightning-fast performance)
-- **Backend:** Node.js & Express.js (RESTful API architecture)
-- **Database:** MongoDB (Scalable NoSQL data modeling)
+---
+
+## 🚀 Features
+
+- 🎓 Issue Digital Certificates
+- 🔍 Verify Certificates using Certificate ID
+- 📋 Admin Dashboard
+- ✏️ Update Certificate Details
+- 🗑️ Delete Certificates
+- 📱 Responsive User Interface
+- 🎨 Modern UI built with Tailwind CSS
+- ⚡ Smooth Animations using AOS
+- ☁️ MongoDB Atlas Database
+- 🔗 RESTful API Integration with Axios
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React.js
+- React Router DOM
+- Tailwind CSS
+- Axios
+- AOS (Animate On Scroll)
+
+### Backend
+- Node.js
+- Express.js
+
+### Database
+- MongoDB Atlas
+- Mongoose
+
+### Version Control
+- Git
+- GitHub
+
+---
 
 ## 📂 Project Structure
-This repository features a unified full-stack layout:
-- `/src` & `/public` - React frontend application files and assets.
-- `/backend` - Node.js environment handling server logic, routing, and database connections.
 
-## 🚀 Key Features Built
-- **Full-Stack Connectivity:** Successfully established communication between the React frontend and Express backend API.
-- **Clean Component Architecture:** Modular React UI layout designed for professional presentation.
-- **Database Schema Ready:** Structured backend environment configured for data persistence.
+```
+CertifyPro/
+│
+├── client/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── layouts/
+│   │   ├── pages/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   └── package.json
+│
+├── server/
+│   ├── config/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   └── package.json
+│
+└── README.md
+```
 
-## 📈 Next Milestones
-- [ ] Implementing dynamic PDF certificate generation engine.
-- [ ] Adding JWT-based user authentication for secure administrative access.
-- [ ] Email automation for direct certificate delivery to recipients.
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/10zn-g-T/CertifyPro.git
+```
+
+### Go to Project Folder
+
+```bash
+cd CertifyPro
+```
+
+---
+
+## Frontend Setup
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+Runs on
+
+```
+http://localhost:5173
+```
+
+---
+
+## Backend Setup
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+Runs on
+
+```
+http://localhost:5000
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file inside the server folder.
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+```
+
+---
+
+## API Endpoints
+
+### Get All Certificates
+
+```
+GET /api/certificates
+```
+
+### Get Certificate by ID
+
+```
+GET /api/certificates/:id
+```
+
+### Create Certificate
+
+```
+POST /api/certificates
+```
+
+### Update Certificate
+
+```
+PUT /api/certificates/:id
+```
+
+### Delete Certificate
+
+```
+DELETE /api/certificates/:id
+```
+
+---
+
+## Screenshots
+
+### 🏠 Home Page
+
+_Add a screenshot here_
+
+### 🎓 Issue Certificate
+
+_Add a screenshot here_
+
+### 🔍 Verify Certificate
+
+_Add a screenshot here_
+
+### 📊 Admin Dashboard
+
+_Add a screenshot here_
+
+---
+
+## Future Improvements
+
+- QR Code Verification
+- PDF Certificate Download
+- Email Notification
+- JWT Authentication
+- Role-based Access Control
+- Certificate Analytics
+- Search & Filters
+- Dark Mode
+
+---
+
+## Learning Outcomes
+
+Through this project I learned:
+
+- React Component Architecture
+- React Router
+- State Management using Hooks
+- REST API Integration
+- CRUD Operations
+- MongoDB Atlas
+- Express.js APIs
+- Axios
+- Tailwind CSS
+- Git & GitHub Workflow
+
+---
+
+## Author
+
+**Tenzing Tamang**
+
+B.Tech Computer Science & Engineering
+
+GitHub:
+https://github.com/10zn-g-T
+
+---
+
+## License
+
+This project is developed for educational purposes.

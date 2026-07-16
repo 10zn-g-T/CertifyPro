@@ -1,3 +1,6 @@
+import API from "../api/certificateApi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import Button from "../components/Button";
@@ -7,9 +10,12 @@ import PasswordInput from "../components/PasswordInput";
 function Register() {
   // State Variables
   const [name, setName] = useState("");
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("admin");
+
 
   // Error State
   const [errors, setErrors] = useState({});
@@ -17,10 +23,9 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [success, setSuccess] = useState("");
 
   // Form Submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newErrors = {};
@@ -36,6 +41,7 @@ function Register() {
         }else if (!/\S+@\S+\.\S+/.test(email)) {
             newErrors.email = "Please enter a valid email address";
         }
+
 
         // Validate Password
         if (password.length < 8) {
@@ -53,21 +59,29 @@ function Register() {
         // If No Errors
         if (Object.keys(newErrors).length === 0) {
 
-            setSuccess("🎉 Registration Successful!");
+          try {
+  await API.post("/auth/register", {
+    name,
+    email,
+    password,
+    role,
+  });
 
-            setName("");
-            setEmail("");
-            setPassword("");
-            setConfirmPassword("");
+  toast.success("Admin Registered Successfully");
 
-            setErrors({});
+  setName("");
+  setEmail("");
+  setPassword("");
+  setConfirmPassword("");
+  setRole("admin");
 
-            console.log({
-                name,
-                email,
-                password,
-                confirmPassword,
-            });
+  navigate("/login");
+
+} catch (error) {
+  toast.error(
+    error.response?.data?.message || "Registration Failed"
+  );
+}
         }
     };
 
@@ -84,11 +98,6 @@ function Register() {
                     Join CertifyPro to manage certificates securely.
                 </p>
 
-                {success && (
-                    <div className="mb-6 rounded-lg bg-green-100 border border-green-400 text-green-700 p-4">
-                        {success}
-                    </div>
-                )}
 
                 <form onSubmit={handleSubmit} className="space-y-5">
 
@@ -110,7 +119,22 @@ function Register() {
                         onChange={(e) => setEmail(e.target.value)}
                         error={errors.email}
                     />
-   
+   <div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    Role
+  </label>
+
+  <select
+    value={role}
+    onChange={(e) => setRole(e.target.value)}
+    className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    <option value="admin">Admin</option>
+    <option value="faculty">Faculty</option>
+    <option value="student">Student</option>
+  </select>
+</div>
+
                     {/* Password */}
                     <PasswordInput
                         label="Password"

@@ -1,4 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import {
   FaHome,
@@ -11,69 +13,113 @@ import {
   FaShieldAlt,
 } from "react-icons/fa";
 
+const role = localStorage.getItem("role");
+
+
 function Sidebar() {
 
-  const menuItems = [
+  const adminMenu = [
+  {
+    name: "Dashboard",
+    path: "/admin",
+    icon: <FaHome />,
+  },
+  {
+    name: "Issue Certificate",
+    path: "/issue-certificate",
+    icon: <FaPlusCircle />,
+  },
+  {
+    name: "Analytics",
+    path: "/analytics",
+    icon: <FaCertificate />,
+  },
+  {
+    name: "Verify",
+    path: "/verify",
+    icon: <FaCheckCircle />,
+  },
+];
 
-    {
-      name: "Dashboard",
-      path: "/dashboard",
-      icon: <FaHome />,
-    },
+const facultyMenu = [
+  {
+    name: "Faculty Dashboard",
+    path: "/faculty",
+    icon: <FaHome />,
+  },
+  {
+    name: "Issue Certificate",
+    path: "/issue-certificate",
+    icon: <FaPlusCircle />,
+  },
+  {
+    name: "Verify",
+    path: "/verify",
+    icon: <FaCheckCircle />,
+  },
+];
 
-    {
-      name: "Certificates",
-      path: "/certificates",
-      icon: <FaCertificate />,
-    },
+const studentMenu = [
+  {
+    name: "Student Dashboard",
+    path: "/student",
+    icon: <FaHome />,
+  },
+  {
+    name: "My Certificates",
+    path: "/my-certificates",
+    icon: <FaCertificate />,
+  },
+  {
+    name: "Verify",
+    path: "/verify",
+    icon: <FaCheckCircle />,
+  },
+];
 
-    {
-      name: "Issue Certificate",
-      path: "/issue-certificate",
-      icon: <FaPlusCircle />,
-    },
+let menuItems = [];
 
-    {
-      name: "Verify",
-      path: "/verify",
-      icon: <FaCheckCircle />,
-    },
+if (role === "admin") {
+  menuItems = adminMenu;
+} else if (role === "faculty") {
+  menuItems = facultyMenu;
+} else if (role === "student") {
+  menuItems = studentMenu;
+}
 
-    {
-      name: "Users",
-      path: "/users",
-      icon: <FaUsers />,
-    },
 
-    {
-      name: "Settings",
-      path: "/settings",
-      icon: <FaCog />,
-    },
+const navigate = useNavigate();
 
-    {
-      name: "Logout",
-      path: "/logout",
-      icon: <FaSignOutAlt />,
-    },
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
+  localStorage.removeItem("name");
 
-  ];
+  toast.success("Logged Out Successfully");
+
+  navigate("/login");
+};
 
   return (
 
     <aside className="w-72 bg-slate-900 text-white min-h-screen p-6">
 
-      <div className="flex items-center gap-3 mb-10">
+      <Link
+  to="/"
+  className="flex items-center gap-3 mb-10 hover:opacity-90 transition"
+>
+  <FaShieldAlt className="text-4xl text-blue-400" />
 
-        <FaShieldAlt className="text-4xl text-blue-400"/>
+  <div>
+    <h1 className="text-2xl font-bold">
+      CertifyPro
+    </h1>
 
-        <h1 className="text-2xl font-bold">
-
-          CertifyPro
-
-        </h1>
-
-      </div>
+    <p className="text-xs text-slate-400">
+      Certificate Management
+    </p>
+  </div>
+</Link>
 
       <nav className="space-y-2">
 
@@ -119,6 +165,20 @@ function Sidebar() {
         ))}
 
       </nav>
+<Link
+  to="/"
+  className="mt-10 w-full flex items-center justify-center gap-3 bg-slate-700 hover:bg-slate-600 rounded-xl py-3 font-semibold transition duration-300"
+>
+  🌐 Visit Website
+</Link>
+
+      <button
+  onClick={handleLogout}
+  className="mt-10 w-full flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 rounded-xl py-3 font-semibold transition duration-300"
+>
+  <FaSignOutAlt />
+  Logout
+</button>
 
     </aside>
 

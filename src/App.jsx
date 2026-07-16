@@ -4,7 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+
 import Verify from "./pages/Verify";
 import Issue from "./pages/Issue";
 import Register from "./pages/Register";
@@ -14,7 +14,11 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Analytics from "./pages/Analytics";
 
+import FacultyDashboard from "./pages/FacultyDashboard";
+import StudentDashboard from "./pages/StudentDashboard";
 
 function App() {
     useEffect(() => {
@@ -38,13 +42,50 @@ function App() {
 
         <Route path="/issue" element={<Issue />} />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+    
         
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={
+                                        
+                                          <Register />
+          }  />
 
-        <Route path="/issue-certificate" element={<IssueCertificate />} />
+        <Route
+  path="/faculty"
+  element={
+    <ProtectedRoute allowedRoles={["faculty"]}>
+      <FacultyDashboard />
+    </ProtectedRoute>
+  }
+/>
 
-        <Route path="/admin" element={<AdminDashboard />} />
+<Route
+  path="/student"
+  element={
+    <ProtectedRoute allowedRoles={["student"]}>
+      <StudentDashboard />
+    </ProtectedRoute>
+  }
+/>
+
+        <Route path="/issue-certificate" element={
+                                                    <ProtectedRoute allowedRoles={["admin", "faculty"]}>
+                                                    <IssueCertificate />
+                                                    </ProtectedRoute>
+                                                  } />
+
+        <Route path="/admin" element={  <ProtectedRoute allowedRoles={["admin"]}>
+                                        <AdminDashboard />
+                                        </ProtectedRoute>
+                                      } />
+
+        <Route
+  path="/analytics"
+  element={
+    <ProtectedRoute allowedRoles={["admin"]}>
+      <Analytics />
+    </ProtectedRoute>
+  }
+/>     
 
         <Route path="/login" element={<Login />} />
 

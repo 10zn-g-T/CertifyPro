@@ -2,6 +2,9 @@ import { useState } from "react";
 import Input from "../components/Input";
 import PasswordInput from "../components/PasswordInput";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
+import API from "../api/certificateApi";
+import toast from "react-hot-toast";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -9,7 +12,9 @@ function Login() {
 
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
@@ -24,15 +29,41 @@ function Login() {
 
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length === 0) {
-      console.log({
-        email,
-        password,
-      });
+   if (Object.keys(newErrors).length === 0) {
+  try {
+    const response = await API.post("/auth/login", {
+      email,
+      password,
+    });
 
-      alert("Login Successful!");
-    }
-  };
+    localStorage.setItem("token", response.data.token);
+    
+    localStorage.setItem("role", response.data.admin.role);
+    localStorage.setItem("name", response.data.admin.name);
+
+   
+toast.success("Login Successful");
+
+const role = response.data.admin.role;
+
+if (role === "admin") {
+  navigate("/admin");
+} else if (role === "faculty") {
+  navigate("/faculty");
+} else if (role === "student") {
+  navigate("/student");
+} else {
+  navigate("/");
+}
+
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message || "Login Failed"
+    );
+  }
+}
+  }
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center px-4">
@@ -77,6 +108,6 @@ function Login() {
 
     </div>
   );
-}
+  }
 
 export default Login;

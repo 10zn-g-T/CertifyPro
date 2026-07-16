@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import API from "../api/certificateApi";
+import Footer from "../components/Footer";
 
 function Verify() {
   const [certificateId, setCertificateId] = useState("");
@@ -343,6 +344,7 @@ className="mt-12 bg-white border border-green-200 rounded-3xl shadow-xl overflow
             </div>
 
         </div>
+        
     );
 }
 

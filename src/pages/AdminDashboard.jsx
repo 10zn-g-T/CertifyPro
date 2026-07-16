@@ -1,18 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import API from "../api/certificateApi";
+import toast from "react-hot-toast";
+import DashboardHeader from "../components/Dashboard/DashboardHeader";
+import StatsCards from "../components/Dashboard/StatsCards";
+import SearchBar from "../components/Dashboard/SearchBar";
+import CertificateTable from "../components/Dashboard/CertificateTable";
+import PrintableCertificate from "../components/PrintableCertificate";
+import { useReactToPrint } from "react-to-print";
+import { useRef } from "react";
+
 import {
-  Search,
   Plus,
-  FileText,
-  GraduationCap,
-  Building2,
-  Award,
-  Eye,
-  Pencil,
-  Trash2,
-  Copy,
-  CheckCircle2,
 } from "lucide-react";
 
 
@@ -21,7 +21,14 @@ function AdminDashboard() {
   const [search, setSearch] = useState("");
   const [editingCertificate, setEditingCertificate] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const navigate = useNavigate();
+  const printRef = useRef();
+  const [printCertificate, setPrintCertificate] = useState(null);
+
+  const handlePrint = useReactToPrint({
+  contentRef: printRef,
+  documentTitle: "Certificate",
+});
 
   useEffect(() => {
     fetchCertificates();
@@ -40,24 +47,13 @@ function AdminDashboard() {
     }
   };
 
+  const [viewCertificate, setViewCertificate] = useState(null);
+
   const filteredCertificates = certificates.filter((certificate) =>
   certificate.studentName.toLowerCase().includes(search.toLowerCase()) ||
   certificate.course.toLowerCase().includes(search.toLowerCase()) ||
   certificate.certificateId.toLowerCase().includes(search.toLowerCase())
 );
-
-const totalCertificates = certificates.length;
-
-const totalCourses = new Set(
-  certificates.map((c) => c.course)
-).size;
-
-const totalInstitutions = new Set(
-  certificates.map((c) => c.institution)
-).size;
-
-const averageGrade =
-  certificates.length > 0 ? "A" : "--";
 
 const handleDelete = async (id) => {
   const confirmDelete = window.confirm(
@@ -69,14 +65,14 @@ const handleDelete = async (id) => {
   try {
     await API.delete(`/certificates/${id}`);
 
-    alert("✅ Certificate Deleted Successfully");
+    toast.success("Certificate Deleted Successfully");
 
     fetchCertificates();
 
   } catch (error) {
     console.error(error);
 
-    alert("❌ Failed to Delete Certificate");
+    toast.error(" Failed to Delete Certificate");
   }
 };
 
@@ -87,7 +83,7 @@ const handleUpdate = async () => {
       editingCertificate
     );
 
-    alert("✅ Certificate Updated Successfully");
+    toast.success("Certificate Updated Successfully");
 
     setEditingCertificate(null);
 
@@ -96,13 +92,15 @@ const handleUpdate = async () => {
   } catch (error) {
     console.error(error);
 
-    alert("❌ Failed to Update Certificate");
+     toast.error("Failed to Update Certificate");
   }
 };
 
 if (loading) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 via-blue-50 to-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 via-blue-50 to-white
+                  dark:from-slate-950 dark:via-slate-900 dark:to-black
+                text-slate-900 dark:text-white">
 
       <div className="text-center">
 
@@ -121,10 +119,18 @@ if (loading) {
     </div>
   );
 }
+const handleLogout = () => {
+  localStorage.removeItem("token");
 
+  toast.success("Logged Out Successfully");
+
+  navigate("/login");
+};
   return (
     
-      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-white p-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-white
+                       dark:from-slate-950 dark:via-slate-900 dark:to-black
+                  text-slate-900 dark:text-white p-8">
   {/* Floating Background */}
 
   <div className="absolute top-0 left-0 w-80 h-80 bg-blue-400 rounded-full blur-[140px] opacity-20 animate-pulse"></div>
@@ -139,33 +145,19 @@ if (loading) {
 
     <div>
 
-      <p className="uppercase tracking-[6px] text-blue-600 font-semibold">
+      <p className="uppercase tracking-[6px] text-blue-600 font-semibold px-5 py-3">
 
         Admin Panel
 
       </p>
 
-      <h1 className="text-5xl font-black mt-3">
-
-        Admin Dashboard
-
-      </h1>
-      <p className="text-gray-500 mt-3 text-lg">
-
-  Welcome back, Administrator 👋
-
-</p>
+      <DashboardHeader onLogout={handleLogout} />
+      
 <span className="inline-flex items-center gap-2 mt-4 bg-green-100 text-green-700 px-4 py-2 rounded-full font-semibold">
 
     🟢 System Online
 
   </span>
-
-      <p className="text-gray-600 mt-3 text-lg">
-
-        Manage certificates, edit records, search students and monitor your platform.
-
-      </p>
 
     </div>
 
@@ -180,377 +172,35 @@ if (loading) {
 
   </div>
 
-  {/* STATISTICS */}
-
-  <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-7 mb-10">
-
-    <div className="bg-white rounded-3xl p-7 shadow-lg hover:-translate-y-2 hover:shadow-2xl duration-500">
-
-      <div className="flex justify-between">
-
-        <div>
-
-          <p className="text-gray-500">
-
-            Total Certificates
-
-          </p>
-
-          <h2 className="text-5xl font-black mt-3">
-
-            {totalCertificates}
-
-          </h2>
-
-        </div>
-
-        <div className="bg-blue-100 p-4 rounded-2xl">
-
-          <FileText className="text-blue-600" size={32} />
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div className="bg-white rounded-3xl p-7 shadow-lg hover:shadow-2xl hover:-translate-y-2 duration-500">
-
-      <div className="flex justify-between">
-
-        <div>
-
-          <p className="text-gray-500">
-
-            Courses
-
-          </p>
-
-          <h2 className="text-5xl font-black mt-3">
-
-            {totalCourses}
-
-          </h2>
-
-        </div>
-
-        <div className="bg-green-100 p-4 rounded-2xl">
-
-          <GraduationCap className="text-green-600" size={32} />
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div className="bg-white rounded-3xl p-7 shadow-lg hover:-translate-y-2 hover:shadow-2xl duration-500">
-
-      <div className="flex justify-between">
-
-        <div>
-
-          <p className="text-gray-500">
-
-            Institutions
-
-          </p>
-
-          <h2 className="text-5xl font-black mt-3">
-
-            {totalInstitutions}
-
-          </h2>
-
-        </div>
-
-        <div className="bg-purple-100 p-4 rounded-2xl">
-
-          <Building2 className="text-purple-600" size={32} />
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div className="bg-white rounded-3xl p-7 shadow-lg hover:-translate-y-2 hover:shadow-2xl duration-500">
-
-      <div className="flex justify-between">
-
-        <div>
-
-          <p className="text-gray-500">
-
-            Average Grade
-
-          </p>
-
-          <h2 className="text-5xl font-black mt-3">
-
-            {averageGrade}
-
-          </h2>
-
-        </div>
-
-        <div className="bg-orange-100 p-4 rounded-2xl">
-
-          <Award className="text-orange-500" size={32} />
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
+  {/* STATISTICS */}    
+  <StatsCards certificates={certificates} />
+        
   {/* SEARCH */}
-
-  <div className="bg-white rounded-2xl shadow-lg p-5 mb-10">
-
-    <div className="relative">
-
-      <Search
-        size={20}
-        className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
-      />
-
-      <input
-        type="text"
-        placeholder="Search certificates..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        shadow-inner
-        className="w-full pl-14 pr-5 py-4 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none"
-      />
-
-    </div>
-
-  </div>
-
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200 hover:border-blue-500 hover:-translate-y-2 hover:shadow-2xl transition-all duration-50">
-
-        <table className="w-full">
-
-          <thead className="bg-gradient-to-r from-slate-700 to-blue-700 text-white">
-
-            <tr>
-                  <th className="px-6 py-5 text-left">Student</th>
-
-    <th className="px-6 py-5 text-left">Course</th>
-
-    <th className="px-6 py-5 text-left">Certificate ID</th>
-
-    <th className="px-6 py-5 text-center">Grade</th>
-
-    <th className="px-6 py-5 text-center">Status</th>
-
-    <th className="px-6 py-5 text-center">Actions</th>
-            </tr>
-
-          </thead>
-
-<tbody>
-
-{filteredCertificates.length === 0 ? (
-
-<tr>
-
-<td
-colSpan="6"
-className="text-center py-16"
->
-
-<div className="flex flex-col items-center py-12">
-
-<FileText
-size={70}
-className="text-blue-400 mb-5"
-/>
-
-<h2 className="text-3xl font-black">
-
-    No Certificates Yet
-
-  </h2>
-
-  <p className="text-gray-500 mt-3">
-
-    Start by issuing your first certificate.
-
-  </p>
-
-<Link
-to="/issue-certificate"
-className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700"
->
-
-Issue Certificate
-
-</Link>
-
-</div>
-
-</td>
-
-</tr>
-
-) : (
-
-filteredCertificates.map((certificate) => (
-
-<tr
-key={certificate._id}
-className="border-b hover:bg-blue-50 over:scale-[1.01] duration-300 hover:shadow-md transition-all"
->
-
-<td className="px-6 py-5">
-
-<div className="flex items-center gap-4">
-
-<div className="h-12 w-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
-
-{certificate.studentName.charAt(0)}
-
-</div>
-
-<div>
-
-<h3 className="font-bold">
-
-{certificate.studentName}
-
-</h3>
-
-<p className="text-sm text-gray-500">
-
-{certificate.institution || "N/A"}
-
-</p>
-
-</div>
-
-</div>
-
-</td>
-
-<td className="px-6 py-5">
-
-{certificate.course}
-
-</td>
-
-<td className="px-6 py-5">
-
-<div className="flex items-center gap-3">
-
-<span className="font-semibold">
-
-{certificate.certificateId}
-
-</span>
-
-<button
-
-onClick={() => {
-
-navigator.clipboard.writeText(
-certificate.certificateId
-);
-
-alert("Certificate ID Copied");
-
+    <SearchBar
+      search={search}
+      setSearch={setSearch}
+    />
+
+     
+     
+      <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200 hover:border-blue-500 hover:-translate-y-2 mt-3 hover:shadow-2xl transition-all duration-50">
+
+        <CertificateTable
+  certificates={filteredCertificates}
+  onEdit={setEditingCertificate}
+  onDelete={handleDelete}
+  onView={(certificate) => setViewCertificate(certificate)}
+  onDownload={(certificate) => {
+    setPrintCertificate(certificate);
+
+    setTimeout(() => {
+        handlePrint();
+    }, 300);
 }}
-
->
-
-<Copy
-size={16}
-className="text-blue-600 hover:scale-125 duration-300"
 />
 
-</button>
-
-</div>
-
-</td>
-
-<td className="px-6 py-5 text-center">
-
-<span className="bg-green-100 text-green-700 px-4 py-2 rounded-full font-semibold">
-
-{certificate.grade}
-
-</span>
-
-</td>
-
-<td className="px-6 py-5 text-center">
-
-<span className="bg-green-100 text-green-700 px-4 py-2 rounded-full flex items-center justify-center gap-2 w-fit mx-auto">
-
-<CheckCircle2 size={16}/>
-
-Verified
-
-</span>
-
-</td>
-
-<td className="px-6 py-5">
-
-<div className="flex justify-center gap-3">
-
-<button
-
-onClick={() => setSelectedCertificate(certificate)}
-
-className="bg-gray-100 p-3 rounded-xl hover:bg-blue-600 hover:text-white transition"
-
->
-
-<Eye size={18}/>
-
-</button>
-
-<button
-
-onClick={() => setEditingCertificate(certificate)}
-
-className="bg-yellow-100 p-3 rounded-xl hover:bg-yellow-500 hover:text-white duration-300"
-
->
-
-<Pencil size={18}/>
-
-</button>
-
-<button
-
-onClick={() => handleDelete(certificate._id)}
-
-className="bg-red-100 p-3 rounded-xl hover:bg-red-600 hover:text-white duration-300"
-
->
-
-<Trash2 size={18}/>
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-))
-
-)}
-
-</tbody>
-
+      </div>
+     
 <div className="mt-16 text-center text-gray-500 text-sm">
 
 <p>
@@ -566,10 +216,6 @@ Developed using React • Tailwind CSS • Node.js • MongoDB
 </p>
 
 </div>
-
-        </table>
-
-      </div>
 
       {editingCertificate && (
   <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
@@ -631,125 +277,69 @@ Developed using React • Tailwind CSS • Node.js • MongoDB
 )}
 </div>   {/* End Main Content */}
 
-{selectedCertificate && (
 
-<div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+{viewCertificate && (
+  <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
 
-<div className="bg-white rounded-3xl p-10 w-full max-w-3xl relative shadow-2xl">
+    <div className="bg-white rounded-3xl p-8 w-[700px] max-w-[95%] shadow-2xl relative">
 
-<button
+      <button
+        onClick={() => setViewCertificate(null)}
+        className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl"
+      >
+        ✕
+      </button>
 
-onClick={() => setSelectedCertificate(null)}
+      <h2 className="text-3xl font-bold text-center mb-6">
+        Certificate Preview
+      </h2>
 
-className="absolute right-6 top-6 text-3xl"
+      <div className="border-4 border-blue-600 rounded-2xl p-10 text-center">
 
->
+        <h1 className="text-4xl font-black text-blue-700">
+          CERTIFYPRO
+        </h1>
 
-×
+        <p className="mt-8 text-gray-500">
+          This certificate is proudly presented to
+        </p>
 
-</button>
+        <h2 className="text-5xl font-bold text-blue-600 mt-5">
+          {viewCertificate.studentName}
+        </h2>
 
-<p className="uppercase tracking-[6px] text-center text-gray-500">
+        <p className="mt-8">
+          For successfully completing
+        </p>
 
-Certificate of Achievement
+        <h3 className="text-3xl font-bold mt-3">
+          {viewCertificate.course}
+        </h3>
 
-</p>
+        <p className="mt-10 font-mono">
+          {viewCertificate.certificateId}
+        </p>
 
-<h1 className="text-center text-5xl font-black mt-4">
+      </div>
 
-CERTIFYPRO
+    </div>
 
-</h1>
-
-<div className="w-24 h-1 bg-blue-600 mx-auto mt-5 rounded-full"></div>
-
-<p className="text-center mt-12 text-gray-500">
-
-This certificate is proudly awarded to
-
-</p>
-
-<h2 className="text-center text-6xl font-black text-blue-600 mt-6">
-
-{selectedCertificate.studentName}
-
-</h2>
-
-<p className="text-center mt-10 text-gray-600">
-
-For successfully completing
-
-</p>
-
-<h3 className="text-center text-4xl font-bold mt-4">
-
-{selectedCertificate.course}
-
-</h3>
-
-<div className="grid grid-cols-2 gap-8 mt-16">
-
-<div>
-
-<p className="text-gray-500">
-
-Certificate ID
-
-</p>
-
-<h4 className="font-bold mt-2">
-
-{selectedCertificate.certificateId}
-
-</h4>
-
-</div>
-
-<div>
-
-<p className="text-gray-500">
-
-Grade
-
-</p>
-
-<h4 className="font-bold mt-2">
-
-{selectedCertificate.grade}
-
-</h4>
-
-</div>
-
-</div>
-
-<div className="flex justify-between mt-16">
-
-<div>
-
-<div className="border-t w-40"></div>
-
-<p className="mt-2">
-
-Authorized Signature
-
-</p>
-
-</div>
-
-<div className="text-7xl">
-
-📱
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+  </div>
 )}
+
+
+<div className="fixed -left-[9999px] top-0">
+
+    <div ref={printRef}>
+
+        <PrintableCertificate
+            certificate={printCertificate}
+        />
+
+    </div>
+
+</div>
+
 
     </div>
   );

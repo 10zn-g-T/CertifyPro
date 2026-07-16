@@ -1,4 +1,7 @@
 import express from "express";
+import protect from "../middleware/authMiddleware.js";
+import authorize from "../middleware/roleMiddleware.js";
+
 import { 
     issueCertificate,
     verifyCertificate,
@@ -9,14 +12,18 @@ import {
 
 const router = express.Router();
 
-router.post("/", issueCertificate);
-
+// Public routes
 router.get("/:id", verifyCertificate);
 
-router.get("/", getAllCertificates);
+// Protected routes
+// Admin + Faculty
+router.post("/", protect, authorize("admin", "faculty"), issueCertificate);
 
-router.delete("/:id", deleteCertificate);
+router.get("/", protect, authorize("admin", "faculty"), getAllCertificates);
 
-router.put("/:id", updateCertificate);
+// Admin only
+router.delete("/:id", protect, authorize("admin"), deleteCertificate);
 
+router.put("/:id", protect, authorize("admin"), updateCertificate);
+ 
 export default router;

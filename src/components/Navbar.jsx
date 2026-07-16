@@ -1,15 +1,48 @@
 import { Link, NavLink } from "react-router-dom";
-import { ShieldCheck, Menu } from "lucide-react";
+import { ShieldCheck, Menu, ChevronDown,
+  User,
+  LayoutDashboard,
+  Settings,
+  LogOut, } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+ 
+    const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+  const name = localStorage.getItem("name");
+
+  let dashboardPath = "/";
+
+if (role === "admin") {
+  dashboardPath = "/admin";
+} else if (role === "faculty") {
+  dashboardPath = "/faculty";
+} else if (role === "student") {
+  dashboardPath = "/student";
+}
+
+ const handleLogout = () => {
+    localStorage.removeItem("token");
+  localStorage.removeItem("role");
+  localStorage.removeItem("name");
+
+    toast.success("Logged Out Successfully");
+
+    navigate("/");
+  };
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Issue", path: "/issue-certificate" },
+  
     { name: "Verify", path: "/verify" },
-    { name: "Dashboard", path: "/dashboard" },
+  
   ];
 
   return (
@@ -54,19 +87,91 @@ function Navbar() {
 
         {/* Right Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Link
-            to="/login"
-            className="font-medium text-gray-700 hover:text-blue-600 transition"
-          >
-            Login
-          </Link>
+          {!token ? (
+    <>
+      <Link
+        to="/login"
+        className="font-medium text-gray-700 hover:text-blue-600 transition"
+      >
+        Login
+      </Link>
 
-          <Link
-            to="/register"
-            className="px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition shadow-lg"
-          >
-            Get Started
-          </Link>
+      <Link
+        to="/register"
+        className="px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition shadow-lg"
+      >
+        Get Started
+      </Link>
+    </>
+  ) : (
+    <div className="relative">
+
+  <button
+    onClick={() => setProfileOpen(!profileOpen)}
+    className="flex items-center gap-3 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hover:bg-blue-700 transition"
+  >
+    <div className="w-9 h-9 rounded-full bg-white text-blue-600 flex items-center justify-center font-bold">
+      {name?.charAt(0).toUpperCase()}
+    </div>
+
+    <div className="text-left">
+      <p className="text-xs opacity-80">
+        Welcome
+      </p>
+
+      <p className="font-semibold">
+        {name}
+      </p>
+    </div>
+
+    <ChevronDown size={18} />
+  </button>
+
+  {profileOpen && (
+    <div className="absolute right-0 mt-3 w-64 rounded-2xl bg-white shadow-2xl border overflow-hidden">
+
+      <div className="px-5 py-4 border-b">
+
+        <p className="font-bold text-slate-800">
+          {name}
+        </p>
+
+        <p className="text-sm text-gray-500 capitalize">
+          {role}
+        </p>
+
+      </div>
+
+      <Link
+        to={dashboardPath}
+        className="flex items-center gap-3 px-5 py-4 hover:bg-gray-100"
+      >
+        <LayoutDashboard size={18} />
+        Dashboard
+      </Link>
+
+      <Link
+        to="/settings"
+        className="flex items-center gap-3 px-5 py-4 hover:bg-gray-100"
+      >
+        <Settings size={18} />
+        Settings
+      </Link>
+
+      <button
+        onClick={handleLogout}
+        className="w-full flex items-center gap-3 px-5 py-4 text-red-600 hover:bg-red-50"
+      >
+        <LogOut size={18} />
+        Logout
+      </button>
+
+    </div>
+  )}
+
+</div>
+  )}
+
         </div>
 
         {/* Mobile */}
@@ -79,18 +184,45 @@ function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden bg-white border-t">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.path}
-              className="block px-6 py-4 hover:bg-gray-100"
-            >
-              {item.name}
-            </NavLink>
-          ))}
-        </div>
-      )}
+  <div className="md:hidden bg-white border-t">
+
+    {navItems.map((item) => (
+      <NavLink
+        key={item.name}
+        to={item.path}
+        className="block px-6 py-4 hover:bg-gray-100"
+      >
+        {item.name}
+      </NavLink>
+    ))}
+
+    {!token ? (
+      <>
+        <Link
+          to="/login"
+          className="block px-6 py-4 hover:bg-gray-100"
+        >
+          Login
+        </Link>
+
+        <Link
+          to="/register"
+          className="block px-6 py-4 bg-blue-600 text-white"
+        >
+          Get Started
+        </Link>
+      </>
+    ) : (
+      <Link
+        to={dashboardPath}
+        className="block px-6 py-4 bg-blue-600 text-white"
+      >
+        Dashboard
+      </Link>
+    )}
+
+  </div>
+)}
     </header>
   );
 }

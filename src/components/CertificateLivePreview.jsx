@@ -2,7 +2,7 @@ import QRCode from "react-qr-code";
 import { Award } from "lucide-react";
 import { useRef } from "react";
 import { toPng } from "html-to-image";
-import jsPDF from "jspdf";
+
 import CertificateCorner from "./CertificateCorner";
 import CertificateSeal from "./CertificateSeal";
 
@@ -207,9 +207,7 @@ const formattedDate = formData.issueDate
           <div>
 
             <div className="border-t-2 border-gray-500 w-42"></div>
-              <p className="text-3xl font-serif text-blue-400 -mt-9">
-                T. Tamang
-              </p>
+
             <p className="mt-2 text-sm">
               Authorized Signature
             </p>

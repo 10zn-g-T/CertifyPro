@@ -16,10 +16,12 @@ const router = express.Router();
 router.get("/:id", verifyCertificate);
 
 // Protected routes
+
+// Admin + Faculty + Student
+router.get("/", protect, authorize("admin", "faculty", "student"), getAllCertificates);
+
 // Admin + Faculty
 router.post("/", protect, authorize("admin", "faculty"), issueCertificate);
-
-router.get("/", protect, authorize("admin", "faculty"), getAllCertificates);
 
 // Admin only
 router.delete("/:id", protect, authorize("admin"), deleteCertificate);

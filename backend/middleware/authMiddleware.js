@@ -19,7 +19,7 @@ const protect = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Save admin info in request
-    req.admin = decoded;
+    req.user = decoded;
 
     next();
 

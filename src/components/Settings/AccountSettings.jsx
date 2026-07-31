@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../../api/certificateApi";
+import API from "../../api/CertificateApi";
 import toast from "react-hot-toast";
 
 function AccountSettings() {

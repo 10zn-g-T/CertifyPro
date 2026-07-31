@@ -3,7 +3,7 @@ import Input from "../components/Input";
 import PasswordInput from "../components/PasswordInput";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
-import API from "../api/certificateApi";
+import API from "../api/CertificateApi";
 import toast from "react-hot-toast";
 
 function Login() {

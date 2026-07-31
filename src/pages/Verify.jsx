@@ -15,7 +15,7 @@ import {
   XCircle,
 } from "lucide-react";
 
-import API from "../api/certificateApi";
+import API from "../api/CertificateApi";
 import Footer from "../components/Footer";
 
 function Verify() {

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import API from "../api/certificateApi";
+import API from "../api/CertificateApi";
 import toast from "react-hot-toast";
 import DashboardHeader from "../components/Dashboard/DashboardHeader";
 import StatsCards from "../components/Dashboard/StatsCards";

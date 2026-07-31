@@ -1,4 +1,4 @@
-import API from "../api/certificateApi";
+import API from "../api/CertificateApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";

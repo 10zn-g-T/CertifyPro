@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../api/certificateApi";
+import API from "../api/CertificateApi";
 
 import AnalyticsCards from "../components/Analytics/AnalyticsCards";
 import MonthlyChart from "../components/Analytics/MonthlyChart";

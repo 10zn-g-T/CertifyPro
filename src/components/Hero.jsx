@@ -1,231 +1,402 @@
 import heroImage from "../assets/images/hero.svg";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+
 import {
   ShieldCheck,
   BadgeCheck,
   FileText,
   Database,
+  ArrowRight,
 } from "lucide-react";
-
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-slate-50 min-h-[92vh] flex items-center pt-36 pb-20">
-{/*background effect*/}
-<div className="absolute top-20 left-20 w-72 h-72 bg-blue-200 rounded-full blur-[140px] opacity-30"></div>
+    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-white">
 
-<div className="absolute bottom-10 right-10 w-80 h-80 bg-indigo-200 rounded-full blur-[170px] opacity-25"></div>
+      {/* Background Grid */}
 
-      {/* Background Blur */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:70px_70px] opacity-40"></div>
 
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-200/30 rounded-full blur-3xl"></div>
+      {/* Soft Gradient */}
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-14 items-center relative z-10">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/60 via-white to-indigo-50/40"></div>
 
-        {/* LEFT */}
+      {/* Small Accent Blur */}
 
-        <motion.div
-          initial={{ opacity: 0, x: -70 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+      <div className="absolute top-24 right-20 w-72 h-72 bg-blue-200 rounded-full blur-[120px] opacity-30"></div>
 
-          {/* Badge */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-28 pb-20">
 
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-5 py-2 rounded-full font-semibold shadow-sm">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
 
-            <ShieldCheck size={18} />
+          {/* ================= LEFT ================= */}
 
-            Trusted Digital Certificate Platform
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
 
-          </div>
+{/* Premium Badge */}
 
-          {/* Heading */}
+<div className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-5 py-2 shadow-sm">
 
-          <h1 className="mt-8 text-5xl lg:text-7xl font-black leading-tight text-slate-900">
+  <ShieldCheck size={18} className="text-blue-600" />
 
-            Issue,
+  <span className="text-sm font-semibold text-slate-700">
+    Trusted by 500+ Institutions
+  </span>
 
-            <span className="text-blue-600"> Verify </span>
+</div>
 
-            & Manage
+{/* Heading */}
 
-            <br />
+<h1 className="mt-8 text-5xl lg:text-7xl font-black tracking-tight leading-[1.05] text-slate-900">
 
-            Digital Certificates
+  Digital Certificate
 
-          </h1>
+  <span className="block text-blue-600">
 
-          {/* Paragraph */}
+    Management
 
-          <p className="mt-8 text-lg text-slate-600 leading-8 max-w-xl">
+  </span>
 
-            Securely issue, manage and verify digital certificates with
-            QR authentication, unique certificate IDs, cloud storage,
-            and instant PDF generation.
+  <span className="block">
 
-          </p>
+    Built for Modern
 
-          {/* Buttons */}
+  </span>
 
-          <div className="flex flex-wrap gap-5 mt-10">
+  <span className="block">
 
-            <Link
-              to="/issue-certificate"
-              className="px-8 py-4 rounded-xl bg-blue-600 text-white font-semibold shadow-xl hover:-translate-y-1 hover:bg-blue-700 transition duration-300"
-            >
-              Generate Certificate
-            </Link>
+    Education.
 
-            <Link
-              to="/verify"
-              className="px-8 py-4 rounded-xl border-2 border-blue-600 text-blue-600 font-semibold hover:bg-blue-600 hover:text-white transition duration-300"
-            >
-              Verify Certificate
-            </Link>
- <Link
-    to="/admin"
-    className="  px-8 py-4 border-2  font-semibold text-black rounded-xl  hover:bg-black hover:text-white transition duration-300"
+  </span>
+
+</h1>
+
+{/* Description */}
+
+<p className="mt-8 max-w-xl text-lg lg:text-xl leading-9 text-slate-600">
+
+  CertifyPro helps universities, colleges and organizations
+  issue, verify and manage digital certificates securely with
+  QR authentication, instant verification and role-based access.
+
+</p>
+
+{/* Buttons */}
+
+<div className="flex flex-wrap gap-4 mt-10">
+
+  <Link
+    to="/issue-certificate"
+    className="group inline-flex items-center gap-3 rounded-2xl bg-blue-600 px-8 py-4 text-white font-semibold shadow-lg hover:bg-blue-700 transition"
   >
-    Admin Dashboard
+    Generate Certificate
+
+    <ArrowRight
+      size={18}
+      className="group-hover:translate-x-1 transition"
+    />
   </Link>
 
-          </div>
-<div className="grid grid-cols-3 gap-8 mt-14">
+  <Link
+    to="/verify"
+    className="rounded-2xl border border-slate-300 px-8 py-4 font-semibold text-slate-700 hover:bg-slate-100 transition"
+  >
+    Verify Certificate
+  </Link>
 
-  <div>
-    <h2 className="text-3xl font-bold text-blue-600">
-      500+
-    </h2>
-    <p className="text-gray-500">
-      Institutions
-    </p>
+</div>
+
+{/* Trusted Features */}
+
+<div className="grid grid-cols-2 gap-5 mt-12 max-w-lg">
+
+  <div className="flex items-center gap-3">
+
+    <BadgeCheck className="text-green-600" size={20} />
+
+    <span className="text-slate-700">
+      QR Verification
+    </span>
+
   </div>
 
-  <div>
-    <h2 className="text-3xl font-bold text-blue-600">
-      12K+
-    </h2>
-    <p className="text-gray-500">
-      Certificates
-    </p>
+  <div className="flex items-center gap-3">
+
+    <Database className="text-purple-600" size={20} />
+
+    <span className="text-slate-700">
+      Secure Storage
+    </span>
+
   </div>
 
-  <div>
-    <h2 className="text-3xl font-bold text-blue-600">
-      99.9%
-    </h2>
-    <p className="text-gray-500">
-      Accuracy
-    </p>
+  <div className="flex items-center gap-3">
+
+    <FileText className="text-blue-600" size={20} />
+
+    <span className="text-slate-700">
+      Instant PDF
+    </span>
+
+  </div>
+
+  <div className="flex items-center gap-3">
+
+    <ShieldCheck className="text-orange-500" size={20} />
+
+    <span className="text-slate-700">
+      Role-Based Access
+    </span>
+
   </div>
 
 </div>
-          {/* Trust Badges */}
+{/* Statistics */}
 
-          <div className="flex flex-wrap gap-8 mt-12">
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-16 max-w-2xl">
 
-            <div className="flex items-center gap-2 text-slate-700">
+  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
 
-              <BadgeCheck className="text-green-600" />
+    <h2 className="text-3xl font-black text-slate-900">
+      500+
+    </h2>
 
-              QR Protected
+    <p className="mt-2 text-slate-500">
+      Trusted Institutions
+    </p>
 
-            </div>
+  </div>
 
-            <div className="flex items-center gap-2 text-slate-700">
+  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
 
-              <FileText className="text-blue-600" />
+    <h2 className="text-3xl font-black text-slate-900">
+      12K+
+    </h2>
 
-              PDF Ready
+    <p className="mt-2 text-slate-500">
+      Certificates Issued
+    </p>
 
-            </div>
+  </div>
 
-            <div className="flex items-center gap-2 text-slate-700">
+  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
 
-              <Database className="text-purple-600" />
+    <h2 className="text-3xl font-black text-slate-900">
+      99.9%
+    </h2>
 
-              Cloud Stored
+    <p className="mt-2 text-slate-500">
+      Verification Accuracy
+    </p>
 
-            </div>
+  </div>
 
-          </div>
+</div>
+</motion.div>
+{/* ================= RIGHT ================= */}
 
-        </motion.div>
+<motion.div
+  initial={{ opacity: 0, x: 60 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8 }}
+  className="relative flex justify-center items-center"
+>
 
-        {/* RIGHT */}
+  {/* Main Illustration */}
 
-        <motion.div
-          initial={{ opacity: 0, x: 70 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9 }}
-          className="relative flex justify-center"
-        >
+  <img
+    src={heroImage}
+    alt="Hero"
+    className="w-full max-w-xl drop-shadow-2xl"
+  />
 
-          <img
-            src={heroImage}
-            alt="Hero"
-            className="w-full max-w-xl drop-shadow-2xl hover:scale-105 duration-500"
-          />
+  {/* Certificate Card */}
 
-          {/* Floating Certificate */}
+  <motion.div
+    animate={{ y: [0, -12, 0] }}
+    transition={{
+      repeat: Infinity,
+      duration: 5,
+      ease: "easeInOut",
+    }}
+    className="absolute left-0 top-14 w-80 rounded-3xl bg-white border border-slate-200 shadow-2xl p-6"
+  >
 
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{
-              repeat: Infinity,
-              duration: 4,
-            }}
-            className="absolute bottom-0 left-0 bg-white rounded-3xl shadow-2xl p-6 w-72 border border-gray-100"
-          >
+    <div className="flex items-center justify-between">
 
-            <h3 className="text-xl font-bold text-slate-900">
+      <div>
 
-              CERTIFYPRO
+        <p className="text-xs uppercase tracking-widest text-slate-400">
+          Digital Certificate
+        </p>
 
-            </h3>
-
-            <p className="text-sm text-gray-500 mt-1">
-
-              Certificate Preview
-
-            </p>
-
-            <div className="border-t my-4"></div>
-
-            <h2 className="text-lg font-bold text-blue-600">
-
-              John Doe
-
-            </h2>
-
-            <p className="text-gray-600">
-
-              React Development
-
-            </p>
-
-            <div className="mt-6 flex justify-between items-center">
-
-              <span className="text-xs text-gray-500">
-
-                Verified
-
-              </span>
-
-              <div className="w-12 h-12 rounded bg-gray-200"></div>
-
-            </div>
-
-          </motion.div>
-
-        </motion.div>
+        <h3 className="text-xl font-bold mt-2">
+          React Development
+        </h3>
 
       </div>
 
-    </section>
+      <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center">
+
+        <ShieldCheck
+          size={22}
+          className="text-white"
+        />
+
+      </div>
+
+    </div>
+
+    <div className="border-t my-6"></div>
+
+    <p className="text-slate-500 text-sm">
+      Awarded To
+    </p>
+
+    <h2 className="text-3xl font-bold mt-2 text-slate-900">
+      John Doe
+    </h2>
+
+    <p className="mt-4 text-slate-500">
+      Certificate ID
+    </p>
+
+    <p className="font-mono text-sm mt-1">
+      CP-2026-000241
+    </p>
+
+    <div className="flex items-center justify-between mt-8">
+
+      <div>
+
+        <p className="text-xs text-slate-500">
+          Status
+        </p>
+
+        <span className="inline-flex mt-2 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+
+          Verified
+
+        </span>
+
+      </div>
+
+      <div className="w-16 h-16 rounded-xl bg-slate-100 flex items-center justify-center">
+
+        QR
+
+      </div>
+
+    </div>
+
+  </motion.div>
+
+  {/* Analytics Card */}
+
+  <motion.div
+    animate={{ y: [0, 12, 0] }}
+    transition={{
+      repeat: Infinity,
+      duration: 6,
+      ease: "easeInOut",
+    }}
+    className="absolute right-0 bottom-8 bg-white rounded-3xl border border-slate-200 shadow-xl p-6 w-64"
+  >
+
+    <p className="text-sm text-slate-500">
+
+      Certificates Issued
+
+    </p>
+
+    <h2 className="text-4xl font-black mt-2">
+
+      12,486
+
+    </h2>
+
+    <div className="mt-6">
+
+      <div className="flex justify-between text-sm mb-2">
+
+        <span className="text-slate-500">
+          Verification Rate
+        </span>
+
+        <span className="font-semibold">
+          99.9%
+        </span>
+
+      </div>
+
+      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+
+        <div className="h-full bg-blue-600 rounded-full w-[99%]"></div>
+
+      </div>
+
+    </div>
+
+    <div className="mt-6 flex items-center gap-3">
+
+      <BadgeCheck
+        className="text-green-600"
+        size={22}
+      />
+
+      <span className="text-slate-600">
+
+        All systems operational
+
+      </span>
+
+    </div>
+
+  </motion.div>
+
+</motion.div>
+
+{/* Trusted Technologies */}
+
+<div className="mt-12">
+
+  <p className="text-sm uppercase tracking-[0.3em] text-slate-400 mb-5">
+
+    Powered By
+
+  </p>
+
+  <div className="flex flex-wrap gap-3">
+
+    {[
+      "React",
+      "Tailwind CSS",
+      "Node.js",
+      "MongoDB",
+      "JWT",
+      "QR Security",
+    ].map((item) => (
+      <span
+        key={item}
+        className="px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-medium shadow-sm"
+      >
+        {item}
+      </span>
+    ))}
+
+  </div>
+
+</div>
+      </div> {/* End Grid */}
+
+    </div> {/* End Container */}
+
+  </section>
   );
 }
 

@@ -165,34 +165,6 @@ DELETE /api/certificates/:id
 
 ---
 
-## Screenshots
-
-### 🏠 Home Page
-
-<p align="center">
-  <img src="./screenshots/home.png" width="800">
-</p>
-
-### 🎓 Issue Certificate
-
-<p align="center">
-  <img src="./screenshots/issue.png" width="800">
-</p>
-
-### 🔍 Verify Certificate
-
-<p align="center">
-  <img src="./screenshots/verify.png" width="800">
-</p>
-
-### 📊 Admin Dashboard
-
-<p align="center">
-  <img src="./screenshots/dashboard.png" width="800">
-</p>
-
----
-
 ## Future Improvements
 
 - QR Code Verification

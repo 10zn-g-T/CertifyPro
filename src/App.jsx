@@ -9,16 +9,14 @@ import Verify from "./pages/Verify";
 import Issue from "./pages/Issue";
 import Register from "./pages/Register";
 import IssueCertificate from "./pages/IssueCertificate";
-import AdminDashboard from "./pages/AdminDashboard";
+import Dashboard from "./pages/Dashboard";
 
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Analytics from "./pages/Analytics";
-
-import FacultyDashboard from "./pages/FacultyDashboard";
-import StudentDashboard from "./pages/StudentDashboard";
+import Settings from "./pages/Settings";
 
 function App() {
     useEffect(() => {
@@ -48,12 +46,12 @@ function App() {
                                         
                                           <Register />
           }  />
-
+<Route path="/settings" element={<Settings />} />
         <Route
   path="/faculty"
   element={
     <ProtectedRoute allowedRoles={["faculty"]}>
-      <FacultyDashboard />
+      <Dashboard />
     </ProtectedRoute>
   }
 />
@@ -62,7 +60,7 @@ function App() {
   path="/student"
   element={
     <ProtectedRoute allowedRoles={["student"]}>
-      <StudentDashboard />
+      <Dashboard />
     </ProtectedRoute>
   }
 />
@@ -74,7 +72,7 @@ function App() {
                                                   } />
 
         <Route path="/admin" element={  <ProtectedRoute allowedRoles={["admin"]}>
-                                        <AdminDashboard />
+                                        <Dashboard />
                                         </ProtectedRoute>
                                       } />
 

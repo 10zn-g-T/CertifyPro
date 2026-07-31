@@ -11,7 +11,7 @@ function MainLayout() {
 
   return (
     <>
-    {!hideNavbar && <Navbar />}
+    <Navbar />
 
       <main className={hideNavbar ? "" : "pt-24"}>
         <Outlet />

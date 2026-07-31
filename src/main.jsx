@@ -10,6 +10,7 @@ import "./index.css";
 import App from "./App";
 import "@fontsource/parisienne";
 import { Toaster } from "react-hot-toast";
+import { loadTheme } from "./utils/theme";
 
 // Initialize AOS
 AOS.init({
@@ -18,6 +19,7 @@ AOS.init({
   easing: "ease-in-out",
 });
 
+loadTheme();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>

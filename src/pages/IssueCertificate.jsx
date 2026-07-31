@@ -3,7 +3,7 @@ import { useState } from "react";
 import CertificateForm from "../components/CertificateForm";
 import CertificateLivePreview from "../components/CertificateLivePreview";
 
-import API from "../api/certificateApi";
+import API from "../api/CertificateApi";
 
 function IssueCertificate() {
 

@@ -62,6 +62,7 @@ export const loginAdmin = async (req, res) => {
       {
         id: admin._id,
         role: admin.role,
+        email: admin.email,
       },
       process.env.JWT_SECRET,
       {

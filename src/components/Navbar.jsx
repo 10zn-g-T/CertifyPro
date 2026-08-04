@@ -3,9 +3,7 @@ import {
   ShieldCheck,
   Menu,
   ChevronDown,
-  LayoutDashboard,
   Bell,
-  Settings,
   LogOut,
 } from "lucide-react";
 import { X } from "lucide-react";
@@ -61,8 +59,12 @@ const notificationCount = 2;
     duration: 0.6,
     ease: "easeOut",
   }}
-  className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/80 border-b border-gray-200"
->
+className="fixed top-0 left-0 w-full z-50
+bg-slate-950/70
+backdrop-blur-xl
+border-b border-slate-800
+transition-all duration-300">
+
         <div className="max-w-1xl mx-auto px-6 h-20 flex items-center justify-between">
 
           {/* Left */}
@@ -70,36 +72,45 @@ const notificationCount = 2;
 
            <button
   onClick={() => setMenuOpen(!menuOpen)}
-  className="p-2 rounded-xl hover:bg-gray-100 transition-all duration-300"
+  className="p-2 text-slate-800 hover:text-blue-600 transition-colors duration-300"
+  aria-label="Toggle Menu"
 >
   <motion.div
-  initial={false}
-  animate={{
-    rotate: menuOpen ? 180 : 0,
-    scale: menuOpen ? 1.1 : 1,
-  }}
-  transition={{
-    duration: 0.3,
-    ease: "easeInOut",
-  }}
->
+    initial={false}
+    animate={{
+      rotate: menuOpen ? 180 : 0,
+    }}
+    transition={{
+      duration: 0.3,
+      ease: "easeInOut",
+    }}
+  >
     {menuOpen ? <X size={28} /> : <Menu size={28} />}
   </motion.div>
 </button>
 
 
-            <Link to="/" className="flex items-center gap-3">
+            <Link
+  to="/"
+  onClick={() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }}
+  className="flex items-center gap-3"
+>
 
-              <div className="bg-blue-600 p-2 rounded-xl">
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-2 rounded-2xl shadow-lg">
                 <ShieldCheck className="text-white" size={24} />
               </div>
 
               <div>
-                <h1 className="text-2xl font-bold text-slate-900">
+                <h1 className="text-2xl font-bold text-white">
                   CertifyPro
                 </h1>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   Digital Certificate Platform
                 </p>
               </div>
@@ -115,14 +126,19 @@ const notificationCount = 2;
 
               <Link
                 to="/login"
-                className="font-medium text-gray-700 hover:text-blue-600 transition"
+                className="px-5 py-3 rounded-xl
+border border-slate-700
+text-gray-300
+hover:bg-slate-800
+transition"
               >
                 Login
               </Link>
 
               <Link
                 to="/register"
-                className="px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition shadow-lg"
+                className="px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 hover:scale-105
+duration-300 "
               >
                 Get Started
               </Link>
@@ -134,7 +150,10 @@ const notificationCount = 2;
 
   <button
     onClick={() => setNotificationOpen(!notificationOpen)}
-    className="relative p-3 rounded-xl hover:bg-gray-100 transition"
+    className="relative p-3 rounded-xl bg-slate-800/60
+border border-slate-700
+hover:bg-slate-700
+text-white transition"
   >
     <Bell size={24} />
 

@@ -64,6 +64,47 @@ export const getAllCertificates = async (req, res) => {
   }
 };
 
+export const getMyCertificates = async (req, res) => {
+  try {
+    const certificates = await Certificate.find({
+      studentEmail: req.user.email,
+    }).sort({
+      createdAt: -1,
+    });
+
+    res.status(200).json({
+      success: true,
+      certificates,
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+};
+export const getMyCertificate = async (req, res) => {
+  try {
+    const certificates = await Certificate.find({
+      studentEmail: req.user.email,
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      certificates,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 export const deleteCertificate = async (req, res) => {
   try {
     const certificate = await Certificate.findById(req.params.id);

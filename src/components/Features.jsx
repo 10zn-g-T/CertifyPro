@@ -49,13 +49,12 @@ const features = [
 
 function Features() {
   return (
-    <section className="relative py-28 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
-
+      <section className="relative py-28 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden text-white">
       {/* Background Decoration */}
 
-      <div className="absolute -left-32 top-20 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl"></div>
+      <div className="absolute -left-40 top-16 w-96 h-96 rounded-full bg-blue-600/20 blur-[120px]"></div>
 
-      <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-indigo-200/30 blur-3xl"></div>
+<div className="absolute right-0 bottom-0 w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[140px]"></div>
 
       <div className="relative max-w-7xl mx-auto px-6">
 
@@ -63,7 +62,7 @@ function Features() {
 
         <div className="flex justify-center">
 
-          <span className="px-5 py-2 rounded-full bg-blue-100 text-blue-700 font-semibold">
+          <span className="px-5 py-2 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 font-semibold">
 
             Platform Features
 
@@ -73,7 +72,7 @@ function Features() {
 
         {/* Heading */}
 
-        <h2 className="mt-6 text-center text-5xl md:text-6xl font-black text-slate-900">
+        <h2 className="mt-6 text-center text-5xl md:text-6xl font-black text-white">
 
           Everything You Need
           <br />
@@ -83,7 +82,7 @@ function Features() {
 
         {/* Description */}
 
-        <p className="mt-6 max-w-3xl mx-auto text-center text-lg text-slate-600 leading-8">
+        <p className="mt-6 max-w-3xl mx-auto text-center text-lg text-gray-400 leading-8">
 
           CertifyPro provides institutions with a complete platform for
           issuing, managing, verifying and securing digital certificates

@@ -10,6 +10,7 @@ import CertificateTable from "../components/Dashboard/CertificateTable";
 import PrintableCertificate from "../components/PrintableCertificate";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
+import MyCertificates from "../components/MyCertificate";
 
 import {
   Plus,
@@ -135,14 +136,22 @@ const handleLogout = () => {
 };
   return (
     
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-100 via-blue-50 to-white
-                       dark:from-slate-950 dark:via-slate-900 dark:to-black
-                  text-slate-900 dark:text-white px-30 pt-30 ">
+      <div
+  className="relative min-h-screen flex flex-col overflow-hidden
+  bg-slate-950
+  text-white
+  px-30
+  pt-30"
+>
   {/* Floating Background */}
 
-  <div className="absolute top-0 left-0 w-80 h-80 bg-blue-400 rounded-full blur-[140px] opacity-20 animate-pulse"></div>
+  <div className="absolute top-10 -left-32 w-96 h-96 bg-blue-600/20 blur-[170px] rounded-full" />
 
-  <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-400 rounded-full blur-[140px] opacity-20 animate-pulse"></div>
+<div className="absolute top-1/2 -right-40 w-[500px] h-[500px] bg-indigo-600/20 blur-[190px] rounded-full" />
+
+<div className="absolute bottom-20 left-1/3 w-80 h-80 bg-cyan-500/10 blur-[160px] rounded-full" />
+
+<div className="absolute bottom-0 right-20 w-72 h-72 bg-purple-600/10 blur-[150px] rounded-full" />
 
   {/* Main Content */}
   <div className="relative z-10 flex-1">
@@ -154,7 +163,7 @@ const handleLogout = () => {
 
     <div>
 
-     <p className="uppercase tracking-[6px] text-blue-600 font-semibold px-5 py-3">
+     <p className="uppercase tracking-[8px] text-blue-400 font-semibold px-5 py-3">
   {isAdmin
     ? "Admin Panel"
     : isFaculty
@@ -162,10 +171,18 @@ const handleLogout = () => {
     : "Student Panel"}
 </p>
 
-      <DashboardHeader onLogout={handleLogout} />
-      
-<span className="inline-flex items-center gap-2 mt-4 bg-green-100 text-green-700 px-4 py-2 rounded-full font-semibold">
+      <DashboardHeader onLogout={handleLogout} />  
 
+<span className="
+inline-flex items-center gap-2
+mt-6
+px-5 py-2
+rounded-full
+bg-emerald-500/10
+border border-emerald-500/30
+text-emerald-300
+backdrop-blur-xl
+">
     🟢 System Online
 
   </span>
@@ -175,7 +192,10 @@ const handleLogout = () => {
 {(isAdmin || isFaculty) && (
     <Link
       to="/issue-certificate"
-      className="mt-8 lg:mt-0 bg-blue-600 hover:bg-blue-700 text-white px-7 py-4 rounded-xl flex items-center gap-3 shadow-xl hover:scale-105 duration-300"
+      className="mt-8 lg:mt-0 bg-gradient-to-r
+from-blue-600
+to-indigo-600
+shadow-[0_10px_40px_rgba(37,99,235,.4)] hover:bg-blue-700 text-white px-7 py-4 rounded-xl flex items-center gap-3 shadow-xl hover:scale-105 duration-300"
     >
       <Plus size={22} />
 
@@ -192,15 +212,26 @@ const handleLogout = () => {
   
 
   {/* SEARCH */}
-    <SearchBar
-      search={search}
-      setSearch={setSearch}
-    />
+   {!isStudent && (
+  <SearchBar
+    search={search}
+    setSearch={setSearch}
+  />
+)}
 
      
-     {(!isStudent || search.trim() !== "") && (
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200 hover:border-blue-500 mt-4 transition-all duration-300">
-
+     {(isAdmin || isFaculty) && (
+<div
+className="
+mt-6
+rounded-3xl
+bg-white/5
+backdrop-blur-2xl
+border border-white/10
+shadow-[0_20px_80px_rgba(0,0,0,.35)]
+overflow-hidden
+"
+>
         <CertificateTable
           role={role}
   certificates={filteredCertificates}
@@ -217,6 +248,10 @@ const handleLogout = () => {
 />
    </div>
      )}     
+
+{isStudent && (
+  <MyCertificates />
+)}
 
 
       {isAdmin && editingCertificate && (

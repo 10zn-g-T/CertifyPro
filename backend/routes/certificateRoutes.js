@@ -6,11 +6,14 @@ import {
     issueCertificate,
     verifyCertificate,
     getAllCertificates,
+    getMyCertificate,
     deleteCertificate,
     updateCertificate,
 } from "../controllers/CertificateController.js";
 
 const router = express.Router();
+
+router.get("/my", protect, authorize("student"), getMyCertificate);
 
 // Public routes
 router.get("/:id", verifyCertificate);

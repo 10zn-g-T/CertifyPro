@@ -21,23 +21,26 @@ function CertificateTable({
   const isStudent = role === "student";
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+    <div className="rounded-3xl overflow-hidden
+bg-slate-900/60
+backdrop-blur-xl
+border border-slate-700
+shadow-[0_20px_60px_rgba(0,0,0,.35)]">
 
-      <table className="w-full">
+      <table className="w-full text-slate-200">
 
-        <thead className="bg-gray-50 border-b">
-
+        <thead className="bg-slate-800/70 border-b border-slate-700">
           <tr>
 
-            <th className="p-5 text-left">Student</th>
+            <th className="p-5 text-left text-slate-300 font-semibold tracking-wide">Student</th>
 
-            <th className="p-5 text-left">Course</th>
+            <th className="p-5 text-left text-slate-300 font-semibold tracking-wide">Course</th>
 
-            <th className="p-5 text-left">Certificate ID</th>
+            <th className="p-5 text-left text-slate-300 font-semibold tracking-wide">Certificate ID</th>
 
-            <th className="p-5 text-left">Status</th>
+            <th className="p-5 text-left text-slate-300 font-semibold tracking-wide">Status</th>
 
-            <th className="p-5 text-center">Actions</th>
+            <th className="p-5 text-center text-slate-300 font-semibold tracking-wide">Actions</th>
 
           </tr>
 
@@ -49,7 +52,7 @@ function CertificateTable({
 
             <tr
               key={certificate._id}
-              className="border-b hover:bg-blue-50 transition"
+              className="border-b border-slate-800 hover:bg-slate-800/60 transition-all duration-300"
             >
 
               {/* Student */}
@@ -72,7 +75,7 @@ function CertificateTable({
 
                     </h3>
 
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-400">
 
                       {certificate.institution}
 
@@ -88,7 +91,9 @@ function CertificateTable({
 
               <td className="p-5">
 
-                <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
+                <span className="bg-blue-500/20
+text-blue-300
+border border-blue-500/30 px-4 py-2 rounded-full text-sm font-semibold">
 
                   {certificate.course}
 
@@ -98,7 +103,7 @@ function CertificateTable({
 
               {/* ID */}
 
-              <td className="p-5 font-mono">
+              <td className="p-5 font-mono text-slate-300">
 
                 {certificate.certificateId}
 
@@ -108,7 +113,9 @@ function CertificateTable({
 
               <td className="p-5">
 
-                <span className="bg-green-100 text-green-700 px-3 py-2 rounded-full text-sm font-semibold">
+                <span className="bg-green-500/20
+text-green-300
+border border-green-500/30 px-3 py-2 rounded-full text-sm font-semibold">
 
                   Verified
 
@@ -126,7 +133,9 @@ function CertificateTable({
   {/* View - Everyone */}
                   <button
                     onClick={() => onView(certificate)}
-                    className="bg-gray-100 hover:bg-gray-200 p-3 rounded-xl"
+                    className="bg-slate-800
+hover:bg-slate-700
+text-slate-200 p-3 rounded-xl"
                   >
                     <FiEye />
                   </button>
@@ -136,7 +145,9 @@ function CertificateTable({
   {/* View - Everyone */}
                   <button
                     onClick={() => onDownload(certificate)}
-                    className="bg-blue-100 hover:bg-blue-200 text-blue-600 p-3 rounded-xl"
+                    className="bg-blue-500/20
+hover:bg-blue-500/30
+text-blue-300 p-3 rounded-xl"
                   >
                     <FiDownload />
                   </button>
@@ -145,7 +156,9 @@ function CertificateTable({
 {isAdmin && (
                   <button
                     onClick={() => onEdit(certificate)}
-                    className="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 p-3 rounded-xl"
+                    className="bg-yellow-500/20
+hover:bg-yellow-500/30
+text-yellow-300 p-3 rounded-xl"
                   >
                     <FiEdit2 />
                   </button>
@@ -154,7 +167,9 @@ function CertificateTable({
 {isAdmin && (
                   <button
                     onClick={() => onDelete(certificate._id)}
-                    className="bg-red-100 hover:bg-red-200 text-red-700 p-3 rounded-xl"
+                    className="bg-red-500/20
+hover:bg-red-500/30
+text-red-300 p-3 rounded-xl"
                   >
                     <FiTrash2 />
                   </button>
@@ -173,18 +188,18 @@ function CertificateTable({
       >
         <div className="flex flex-col items-center">
 
-           <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center">
+           <div className="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center">
 
         <FileSearch
           size={40}
-          className="text-gray-400"
+          className="text-slate-500"
         />
         </div>
-          <h3 className="text-xl mt-2 font-bold text-slate-700">
+          <h3 className="text-xl mt-2 font-bold text-white">
             No Certificates Found
           </h3>
 
-          <p className="text-gray-500 mt-2">
+          <p className="text-slate-400 mt-2">
             Try searching with another name or certificate ID.
           </p>
 

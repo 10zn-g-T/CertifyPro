@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import {
   Home,
   BadgeCheck,
@@ -20,8 +19,8 @@ import {
 const publicMenu = [
   { name: "Home", path: "/", icon: <Home size={20} /> },
   { name: "Verify", path: "/verify", icon: <BadgeCheck size={20} /> },
-  { name: "About", path: "/about", icon: <Info size={20} /> },
-  { name: "Contact", path: "/contact", icon: <Phone size={20} /> },
+  { name: "About", section: "about", icon: <Info size={20} /> },
+  { name: "Contact", section: "contact", icon: <Phone size={20} /> },
 ];
 
 const adminMenu = [
@@ -31,8 +30,8 @@ const adminMenu = [
   { name: "Dashboard", path: "/admin", icon: <LayoutDashboard size={20} /> },
   { name: "Analytics", path: "/analytics", icon: <BarChart3 size={20} /> },
   { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
-  { name: "About", path: "/about", icon: <Info size={20} /> },
-  { name: "Contact", path: "/contact", icon: <Phone size={20} /> },
+  { name: "About", section: "about", icon: <Info size={20} /> },
+  { name: "Contact", section: "contact", icon: <Phone size={20} /> },
 ];
 
 const facultyMenu = [
@@ -41,8 +40,8 @@ const facultyMenu = [
   { name: "Verify", path: "/verify", icon: <BadgeCheck size={20} /> },
   { name: "Dashboard", path: "/faculty", icon: <LayoutDashboard size={20} /> },
   { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
-  { name: "About", path: "/about", icon: <Info size={20} /> },
-  { name: "Contact", path: "/contact", icon: <Phone size={20} /> },
+  { name: "About", section: "about", icon: <Info size={20} /> },
+  { name: "Contact", section: "contact", icon: <Phone size={20} /> },
 ];
 
 const studentMenu = [
@@ -50,14 +49,16 @@ const studentMenu = [
   { name: "Verify", path: "/verify", icon: <BadgeCheck size={20} /> },
   { name: "Dashboard", path: "/student", icon: <LayoutDashboard size={20} /> },
   { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
-  { name: "About", path: "/about", icon: <Info size={20} /> },
-  { name: "Contact", path: "/contact", icon: <Phone size={20} /> },
+  { name: "About", section: "about", icon: <Info size={20} /> },
+  { name: "Contact", section: "contact", icon: <Phone size={20} /> },
 ];
 
 
 
-
 function Drawer({ open, setOpen }) {
+  
+const location = useLocation();
+
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
@@ -72,6 +73,50 @@ if (role === "admin") {
 } else if (role === "student") {
   menuItems = studentMenu;
 }
+
+const handleSectionNavigation = (section) => {
+  setOpen(false);
+
+  // If already on Home, scroll directly
+  if (location.pathname === "/") {
+    const element = document.getElementById(section);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+
+    return;
+  }
+
+  // Otherwise go Home and tell Home which section to scroll to
+  navigate("/", {
+    state: {
+      scrollTo: section,
+    },
+  });
+};
+
+const handleHomeNavigation = () => {
+  setOpen(false);
+
+  // If already on Home, scroll to Hero (top)
+  if (location.pathname === "/") {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    return;
+  }
+
+  // Otherwise go Home and scroll to top
+  navigate("/", {
+    state: {
+      scrollTo: "top",
+    },
+  });
+};
 
 
 const handleLogout = () => {
@@ -97,7 +142,7 @@ const handleLogout = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-20 left-0 right-0 bottom-0 bg-black/30 backdrop-blur-[2px] z-40"
+            className="fixed top-20 left-0 right-0 bottom-0 bg-slate-950/60 backdrop-blur-sm z-40"
             onClick={() => setOpen(false)}
           />
 
@@ -110,12 +155,17 @@ const handleLogout = () => {
               duration: 0.35,
               ease: [0.25, 0.8, 0.25, 1],
             }}
-            className="fixed top-20 left-0 h-[calc(100vh-80px)] w-72 bg-white border-r border-gray-200 shadow-2xl z-50 flex flex-col"
+className="fixed top-20 left-0 h-[calc(100vh-80px)] w-72
+bg-slate-900/90
+backdrop-blur-2xl
+border-r border-slate-700
+shadow-[0_20px_60px_rgba(0,0,0,.45)]
+z-50 flex flex-col text-white"
           >
 {token && (
-  <div className="px-4 py-4 border-b border-gray-150 mb-0">
+  <div className="px-5 py-5 border-b border-slate-700">
 
-    <h2 className="text-lg text-gray-500 capitalize">
+    <h2 className="text-lg font-semibold text-white capitalize">
       {role === "admin"
         ? "Administrator"
         : role === "faculty"
@@ -127,28 +177,63 @@ const handleLogout = () => {
 )}
             
             {/* Menu */}
-            <nav className="flex flex-col p-5 space-y-2">
-
-  {menuItems.map((item) => (
-
-    <Link
-      key={item.name}
-      to={item.path}
-      onClick={() => setOpen(false)}
-      className="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition"
-    >
-      {item.icon}
-
-      <span>{item.name}</span>
-
-    </Link>
-
-  ))}
-
+          <nav className="flex flex-col p-5 space-y-2">
+  {menuItems.map((item) =>
+  item.name === "Home" ? (
+  <button
+    key={item.name}
+    onClick={handleHomeNavigation}
+className="
+flex items-center gap-3
+p-3
+rounded-xl
+text-gray-300
+hover:bg-slate-800
+hover:text-blue-400
+transition-all duration-300
+"  >
+    {item.icon}
+    <span>{item.name}</span>
+  </button>
+    ) : item.section ? (
+      <button
+        key={item.name}
+        onClick={() => handleSectionNavigation(item.section)}
+className="
+flex items-center gap-3
+p-3
+rounded-xl
+text-gray-300
+hover:bg-slate-800
+hover:text-blue-400
+transition-all duration-300
+"      >
+        {item.icon}
+        <span>{item.name}</span>
+      </button>
+    ) : (
+      <Link
+        key={item.name}
+        to={item.path}
+        onClick={() => setOpen(false)}
+className="
+flex items-center gap-3
+p-3
+rounded-xl
+text-gray-300
+hover:bg-slate-800
+hover:text-blue-400
+transition-all duration-300
+"      >
+        {item.icon}
+        <span>{item.name}</span>
+      </Link>
+    )
+  )}
 </nav>
 
             {/* Footer */}
-           <div className="border-t p-5">
+           <div className="border-t border-slate-700 p-5">
 
   {!token ? (
     <div className="space-y-3">
@@ -156,8 +241,15 @@ const handleLogout = () => {
       <Link
         to="/login"
         onClick={() => setOpen(false)}
-        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border hover:bg-gray-100 transition"
-      >
+className="
+flex items-center gap-3
+p-3
+rounded-xl
+text-gray-300
+hover:bg-slate-800
+hover:text-blue-400
+transition-all duration-300
+"      >
         <LogIn size={18} />
         Login
       </Link>
@@ -165,8 +257,15 @@ const handleLogout = () => {
       <Link
         to="/register"
         onClick={() => setOpen(false)}
-        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
-      >
+className="
+flex items-center gap-3
+p-3
+rounded-xl
+text-gray-300
+hover:bg-slate-800
+hover:text-blue-400
+transition-all duration-300
+"      >
         <UserPlus size={18} />
         Get Started
       </Link>
@@ -175,8 +274,15 @@ const handleLogout = () => {
   ) : (
     <button
       onClick={handleLogout}
-      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-red-600 text-white hover:bg-red-700 transition"
-    >
+className="
+flex items-center gap-3
+p-3
+rounded-xl
+text-gray-300
+hover:bg-slate-800
+hover:text-blue-400
+transition-all duration-300
+"    >
       <LogOut size={18} />
       Logout
     </button>

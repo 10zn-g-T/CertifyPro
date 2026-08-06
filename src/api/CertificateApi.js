@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://certifypro-1-ptki.onrender.com",
+  baseURL: "https://certifypro-1-ptki.onrender.com/api",
 });
 
 // Automatically attach JWT token

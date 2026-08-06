@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import CertificateForm from "../components/CertificateForm";
-import CertificateLivePreview from "../components/CertificateLivePreview";
+import CertificateForm from "../components/Issue/CertificateForm";
+import CertificateLivePreview from "../components/Issue/CertificateLivePreview";
 
 import API from "../api/CertificateApi";
 
@@ -99,23 +99,48 @@ try {
 };
 
   return (
-  <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+<div
+  className="
+  min-h-screen
+  relative
+  overflow-hidden
+  bg-gradient-to-br
+  from-slate-950
+  via-slate-900
+  to-black
+  text-white
+"
+>
+  <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-[170px] opacity-20 animate-pulse"></div>
 
+<div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-[170px] opacity-20 animate-pulse"></div>
+    
     {/* Header */}
 
-    <div className="border-b bg-white/80 backdrop-blur-md">
-
+<div
+className="
+relative
+z-10
+border-b
+border-slate-800
+bg-slate-900/60
+backdrop-blur-xl
+"
+>
       <div className="max-w-7xl mx-auto px-8 py-8">
 
-        <span className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
+        <span className="inline-block bg-blue-500/20
+text-blue-300
+border
+border-blue-500/30 px-4 py-2 rounded-full text-sm font-semibold">
           Certificate Management
         </span>
 
-        <h1 className="text-5xl font-black text-slate-900 mt-5">
+        <h1 className="text-5xl font-black text-white mt-5">
           Issue New Certificate
         </h1>
 
-        <p className="text-gray-600 mt-3 text-lg">
+        <p className="text-slate-400 mt-3 text-lg">
           Fill in the student details below to generate a secure digital certificate.
         </p>
 
@@ -125,11 +150,29 @@ try {
 
     {/* Content */}
 
-    <div className="max-w-7xl mx-auto px-8 py-12 grid lg:grid-cols-5 gap-10">
+      <div
+className="
+relative
+z-10
+max-w-7xl
+mx-auto
+px-8
+py-14
+grid
+lg:grid-cols-5
+gap-10
+"
+>
 
       {/* Left */}
 
-      <div className="lg:col-span-3">
+      <div className="rounded-[30px]
+bg-slate-900/70
+backdrop-blur-xl
+border
+border-slate-700
+shadow-2xl
+p-8 lg:col-span-3">
 
         <CertificateForm
           formData={formData}
@@ -137,13 +180,13 @@ try {
           handleSubmit={handleSubmit}
           errors={errors}
         />
-
-      </div>
+</div>
+   
 
       {/* Right */}
 
       <div className="lg:col-span-2">
-         <div className="sticky top-10">
+         <div className="sticky top-10 space-y-6">
 
           <CertificateLivePreview
             formData={formData}

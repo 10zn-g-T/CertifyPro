@@ -33,9 +33,20 @@ function CoursePieChart({ certificates }) {
 
   return (
 
-    <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-lg p-6">
+    <div className="
+bg-slate-900/70
+backdrop-blur-xl
+border
+border-slate-700
+rounded-3xl
+shadow-2xl
+p-8
+hover:border-blue-500
+transition-all
+duration-300
+">
 
-      <h2 className="text-2xl font-bold mb-6">
+      <h2 className="text-2xl font-bold text-white mb-6">
 
         Course Distribution
 
@@ -43,30 +54,43 @@ function CoursePieChart({ certificates }) {
 
       <ResponsiveContainer width="100%" height={350}>
 
-        <PieChart>
+       <PieChart>
 
-          <Pie
-            data={courseData}
-            dataKey="value"
-            nameKey="name"
-            outerRadius={120}
-            label
-          >
+  <Pie
+    data={courseData}
+    dataKey="value"
+    nameKey="name"
+    innerRadius={60}
+    outerRadius={130}
+    isAnimationActive
+    animationDuration={1000}
+    label={{
+      fill: "#fff",
+      fontSize: 13,
+      fontWeight: 600,
+    }}
+  >
+    {courseData.map((entry, index) => (
+      <Cell
+        key={index}
+        fill={COLORS[index % COLORS.length]}
+      />
+    ))}
+  </Pie>
 
-            {courseData.map((entry, index) => (
+  <Tooltip
+    contentStyle={{
+      background: "#0f172a",
+      border: "1px solid #334155",
+      borderRadius: "16px",
+      color: "#fff",
+    }}
+    labelStyle={{
+      color: "#fff",
+    }}
+  />
 
-              <Cell
-                key={index}
-                fill={COLORS[index % COLORS.length]}
-              />
-
-            ))}
-
-          </Pie>
-
-          <Tooltip />
-
-        </PieChart>
+</PieChart>
 
       </ResponsiveContainer>
 

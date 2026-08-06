@@ -1,10 +1,10 @@
 import QRCode from "react-qr-code";
-import { Award } from "lucide-react";
 import { useRef } from "react";
 import { toPng } from "html-to-image";
+import jsPDF from "jspdf";
+import CertificateCorner from "../CertificateCorner";
+import CertificateSeal from "../CertificateSeal";
 
-import CertificateCorner from "./CertificateCorner";
-import CertificateSeal from "./CertificateSeal";
 
 function CertificateLivePreview({ formData }) {
       const certificateRef = useRef();
@@ -89,12 +89,12 @@ const formattedDate = formData.issueDate
         <h1 className="text-4xl font-black tracking-wide">
           CERTIFYPRO
         </h1>
-
+<div className="mt-2 flex flex-col items-center">
         <p className="uppercase tracking-[6px] mt-2 text-blue-100">
           Certificate of Achievement
-          <div className="w-50 h-1 bg-gradient-to-r from-blue-500 to-indigo-400 mx-auto rounded-full mt-5"></div>
         </p>
-
+          <div className="w-50 h-1 bg-gradient-to-r from-blue-500 to-indigo-400 mx-auto rounded-full mt-5"></div>
+</div>
       </div>
   
       {/* Certificate */}
@@ -254,8 +254,23 @@ const formattedDate = formData.issueDate
 
     <button
       onClick={downloadPDF}
-      className="w-full mt-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-bold shadow-xl transition-all duration-300 hover:scale-[1.02]"
-    >
+    className="
+flex
+items-center
+gap-3
+px-8
+py-4
+rounded-2xl
+bg-gradient-to-r
+from-emerald-600
+to-green-600
+hover:scale-105
+transition
+font-bold
+shadow-lg
+"
+>
+
       Download Certificate PDF
     </button>
 

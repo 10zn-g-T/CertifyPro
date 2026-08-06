@@ -18,23 +18,37 @@ function CertificateForm({
         return (
             <div 
              data-aos="fade-right"
-            className="bg-white rounded-3xl shadow-2xl border border-slate-200 p-10">
+            className="
+group
+bg-slate-900/70
+backdrop-blur-xl
+border
+border-slate-700
+rounded-[32px]
+shadow-2xl
+p-10
+hover:border-blue-500/40
+transition-all
+duration-300
+">
 
                 <div className="flex items-center gap-4 mb-10">
 
-  <div className="h-16 w-16 rounded-2xl bg-blue-100 flex items-center justify-center">
+  <div className="h-16 w-16 rounded-2xl bg-blue-500/20
+border
+border-blue-500/30 flex items-center justify-center">
 
-    <GraduationCap className="text-blue-600" size={30} />
+    <GraduationCap className="text-blue-400" size={30} />
 
   </div>
 
   <div>
 
-    <h1 className="text-4xl font-black text-slate-900">
+    <h1 className="text-4xl font-black text-white">
       Issue Certificate
     </h1>
 
-    <p className="text-gray-500 mt-1">
+    <p className="text-slate-400 mt-1">
       Create secure digital certificates in seconds.
     </p>
 
@@ -47,7 +61,9 @@ function CertificateForm({
                     {/* Student Information */}
 
                     <div>
-                        <h2 className="text-xl font-bold text-slate-800 border-b pb-3 mb-8">
+                        <h2 className="text-xl font-bold text-white
+border-b
+border-slate-700 pb-3 mb-8">
                             Student Information
                         </h2>
 
@@ -55,7 +71,7 @@ function CertificateForm({
 
                             <div>
 
-                              <label className="block mb-2 font-medium">
+                              <label className="block mb-2 font-medium text-slate-300">
                                   Student Name
                               </label>
 
@@ -72,7 +88,21 @@ function CertificateForm({
                                 value={formData.studentName}
                                 onChange={handleChange}
                                 placeholder="Enter Student Name"
-                                className="w-full rounded-xl border border-slate-300 bg-slate-50 pl-14  px-4 py-3 outline-none transition duration-300 focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                                className="w-full rounded-xl border
+border-slate-700
+bg-slate-800/70
+text-white
+placeholder:text-slate-500
+pl-14
+px-4
+py-3
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/20
+"
                               />
                               </div>
 
@@ -105,7 +135,21 @@ function CertificateForm({
                                 value={formData.studentEmail}
                                 onChange={handleChange}
                                 placeholder="Enter Student Email"
-                                className="w-full rounded-xl border border-slate-300 bg-slate-50 pl-14 px-4 py-3 outline-none transition duration-300 focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                                className="w-full rounded-xl border
+border-slate-700
+bg-slate-800/70
+text-white
+placeholder:text-slate-500
+pl-14
+px-4
+py-3
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/20
+"
                               />
 </div>
                               {errors.studentEmail && (
@@ -124,7 +168,8 @@ function CertificateForm({
                       {/* Course Information */}
                       <div>
                         
-                        <h2 className="text-xl font-bold text-slate-800 border-b pb-3 mb-8">
+                        <h2 className="text-xl font-bold text-white border-b
+border-slate-700 pb-3 mb-8">
                             Course Information
                         </h2>
 
@@ -147,7 +192,21 @@ function CertificateForm({
                               value={formData.course}
                               onChange={handleChange}
                               placeholder="Enter Course Name"
-                              className="w-full rounded-xl border border-slate-300 bg-slate-50 pl-14 px-4 py-3 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                              className="w-full rounded-xl border
+border-slate-700
+bg-slate-800/70
+text-white
+placeholder:text-slate-500
+pl-14
+px-4
+py-3
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/20
+"
                             />
    </div>
                             {errors.course && (
@@ -173,7 +232,21 @@ function CertificateForm({
                               value={formData.institution}
                               onChange={handleChange}
                               placeholder="Enter Institution"
-                              className="w-full rounded-xl border border-slate-300 bg-slate-50 pl-14 px-4 py-3 outline-none transition duration-300 focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                              className="w-full rounded-xl border
+border-slate-700
+bg-slate-800/70
+text-white
+placeholder:text-slate-500
+pl-14
+px-4
+py-3
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/20
+"
                             />
 </div>
 
@@ -191,7 +264,8 @@ function CertificateForm({
         {/* Certificate Details */}
         <div>
 
-          <h2 className="text-xl font-bold text-slate-800 border-b pb-3 mb-8">
+          <h2 className="text-xl font-bold text-white border-b
+border-slate-700 pb-3 mb-8">
             Certificate Details
           </h2>
 
@@ -214,7 +288,21 @@ function CertificateForm({
                 name="issueDate"
                 value={formData.issueDate}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-300 bg-slate-50 pl-14 px-4 py-3 outline-none transition duration-300 focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                className="w-full rounded-xl border
+border-slate-700
+bg-slate-800/70
+text-white
+placeholder:text-slate-500
+pl-14
+px-4
+py-3
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/20
+"
               />
 </div>
               {errors.issueDate && (
@@ -239,7 +327,21 @@ function CertificateForm({
                 name="grade"
                 value={formData.grade}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-300 bg-slate-50 pl-12 pr-4 py-3 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                className="w-full rounded-xl border
+border-slate-700
+bg-slate-800/70
+text-white
+placeholder:text-slate-500
+pl-14
+px-4
+py-3
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/20
+"
               >
                 <option value="">Select Grade</option>
                 <option>A+</option>
@@ -251,7 +353,7 @@ function CertificateForm({
               </select>
 </div>
               {errors.grade && (
-                <p className="text-red-500 text-sm mt-2">
+                <p className="text-red-400 text-sm mt-2">
                   {errors.grade}
                 </p>
               )}
@@ -279,7 +381,21 @@ function CertificateForm({
             value={formData.description}
             onChange={handleChange}
             placeholder="Certificate Description..."
-            className="w-full rounded-xl border border-slate-300 bg-slate-50 pl-14 px-4 py-3 outline-none transition duration-300 focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100"
+            className="w-full rounded-xl border
+border-slate-700
+bg-slate-800/70
+text-white
+placeholder:text-slate-500
+pl-14
+px-4
+py-3
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/20
+"
           ></textarea>
 </div>
         </div>
@@ -287,7 +403,8 @@ function CertificateForm({
         {/* Submit Button */}
         <button
   type="submit"
-  className="group w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-4 rounded-xl text-lg font-bold shadow-lg transition-all duration-300 hover:scale-[1.02]"
+  className="group w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-blue-500/30
+hover:-translate-y-1 text-white py-4 rounded-xl text-lg font-bold shadow-lg transition-all duration-300 hover:scale-[1.02]"
 >
   <Send
     size={20}

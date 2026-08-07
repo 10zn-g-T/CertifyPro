@@ -178,7 +178,7 @@ text-yellow-300 p-3 rounded-xl"
 
 {isAdmin && (
                   <button
-                    onClick={() => onDelete(certificate._id)}
+                    onClick={() => onDelete(certificate)}
                     className="bg-red-500/20
 hover:bg-red-500/30
 text-red-300 p-3 rounded-xl"

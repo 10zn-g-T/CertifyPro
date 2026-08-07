@@ -31,6 +31,7 @@ const isStudent = role === "student";
   const navigate = useNavigate();
   const printRef = useRef();
   const [printCertificate, setPrintCertificate] = useState(null);
+  const [deleteCertificate, setDeleteCertificate] = useState(null);
 
   const handlePrint = useReactToPrint({
   contentRef: printRef,
@@ -63,26 +64,7 @@ const isStudent = role === "student";
   certificate.certificateId.toLowerCase().includes(search.toLowerCase())
 );
 
-const handleDelete = async (id) => {
-  const confirmDelete = window.confirm(
-    "Are you sure you want to delete this certificate?"
-  );
 
-  if (!confirmDelete) return;
-
-  try {
-    await API.delete(`/certificates/${id}`);
-
-    toast.success("Certificate Deleted Successfully");
-
-    fetchCertificates();
-
-  } catch (error) {
-    console.error(error);
-
-    toast.error(" Failed to Delete Certificate");
-  }
-};
 
 const handleUpdate = async () => {
   try {
@@ -101,6 +83,18 @@ const handleUpdate = async () => {
     console.error(error);
 
      toast.error("Failed to Update Certificate");
+  }
+};
+
+const handleDelete = async (id) => {
+  try {
+    await API.delete(`/certificates/${id}`);
+
+    toast.success("Certificate Deleted Successfully");
+
+    fetchCertificates();
+  } catch (error) {
+    toast.error("Failed to Delete Certificate");
   }
 };
 
@@ -236,7 +230,7 @@ overflow-hidden
           role={role}
   certificates={filteredCertificates}
   onEdit={setEditingCertificate}
-  onDelete={handleDelete}
+  onDelete={(certificate) => setDeleteCertificate(certificate)}
   onView={(certificate) => setViewCertificate(certificate)}
   onDownload={(certificate) => {
     setPrintCertificate(certificate);
@@ -466,6 +460,52 @@ text-2xl
   </div>
 )}
 
+{deleteCertificate && (
+  <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center">
+
+    <div className="w-full max-w-md rounded-3xl bg-slate-900/90 border border-red-500/20 p-8 shadow-2xl">
+
+      <h2 className="text-3xl font-bold text-red-400">
+        Delete Certificate
+      </h2>
+
+      <p className="mt-5 text-slate-300">
+        Are you sure you want to delete
+      </p>
+
+      <h3 className="mt-2 text-xl font-semibold text-white">
+        {deleteCertificate.studentName}
+      </h3>
+
+      <p className="text-slate-500 mt-3">
+        This action cannot be undone.
+      </p>
+
+      <div className="flex justify-end gap-4 mt-8">
+
+        <button
+          onClick={() => setDeleteCertificate(null)}
+          className="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={async () => {
+            await handleDelete(deleteCertificate._id);
+            setDeleteCertificate(null);
+          }}
+          className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white"
+        >
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
 
 <div className="fixed -left-[9999px] top-0">
 

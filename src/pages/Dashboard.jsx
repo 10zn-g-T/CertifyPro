@@ -255,11 +255,33 @@ overflow-hidden
 
 
       {isAdmin && editingCertificate && (
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+  <div className="
+fixed
+inset-0
+z-50
+bg-black/70
+backdrop-blur-md
+flex
+items-center
+justify-center
+px-6
+">
 
-    <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-xl animate-[fadeIn_.3s]">
+    <div className="
+w-full
+max-w-xl
+rounded-[32px]
+bg-slate-900/80
+backdrop-blur-2xl
+border
+border-slate-700
+shadow-[0_20px_80px_rgba(0,0,0,.5)]
+p-8
+text-white
+animate-[fadeIn_.3s]
+">
 
-      <h2 className="text-3xl font-bold mb-8">
+      <h2 className="text-3xl font-bold mb-8 text-white">
         Edit Certificate
       </h2>
 
@@ -272,8 +294,22 @@ overflow-hidden
             studentName: e.target.value,
           })
         }
-        className="w-full border-2 border-gray-200 rounded-xl px-4 py-3  focus:border-blue-500 outline-none duration-300"
-      />
+className="
+w-full
+rounded-2xl
+bg-slate-800/70
+border
+border-slate-700
+text-white
+placeholder:text-slate-500
+px-5
+py-4
+outline-none
+transition
+focus:border-blue-500
+focus:ring-2
+focus:ring-blue-500/30 
+"      />
 
       <input
         type="text"
@@ -284,14 +320,32 @@ overflow-hidden
             course: e.target.value,
           })
         }
-        className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 mt-2 focus:border-blue-500 outline-none duration-300"
-      />
+className="
+w-full
+rounded-2xl
+bg-slate-800/70
+border
+border-slate-700
+text-white
+placeholder:text-slate-500
+px-5
+py-4
+outline-none
+transition
+focus:border-blue-500
+focus:ring-2
+focus:ring-blue-500/30 mt-3
+"      />
 
       <div className="flex justify-end gap-4">
 
         <button
           onClick={() => setEditingCertificate(null)}
-          className="px-6 py-3 mt-2 rounded-xl bg-gray-200 hover:bg-gray-300 duration-300"
+          className="px-6 py-3 mt-2 rounded-xl bg-slate-800
+border
+border-slate-700
+text-slate-300
+hover:bg-slate-700 duration-300"
         >
           Cancel
         </button>
@@ -299,7 +353,13 @@ overflow-hidden
         <button
         
   onClick={handleUpdate}
-  className="px-6 py-3 mt-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white duration-300"
+  className="px-6 py-3 mt-2 rounded-xl bg-gradient-to-r
+from-blue-600
+to-indigo-600
+hover:from-blue-700
+hover:to-indigo-700
+shadow-lg
+hover:shadow-blue-500/30 text-white duration-300"
 >
  
     
@@ -316,44 +376,86 @@ overflow-hidden
 
 
 {viewCertificate && (
-  <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
-
-    <div className="bg-white rounded-3xl p-8 w-[700px] max-w-[95%] shadow-2xl relative">
-
+  <div
+  className="
+    fixed
+    inset-0
+    z-50
+    bg-black/70
+    backdrop-blur-md
+    flex
+    items-center
+    justify-center
+    px-6
+  "
+>
+    <div
+  className="
+    relative
+    w-[700px]
+    max-w-[95%]
+    rounded-[32px]
+    bg-slate-900/80
+    backdrop-blur-2xl
+    border
+    border-slate-700
+    shadow-[0_20px_80px_rgba(0,0,0,.5)]
+    p-8
+    text-white
+  "
+>
       <button
         onClick={() => setViewCertificate(null)}
-        className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl"
+        className="
+absolute
+top-5
+right-5
+text-slate-400
+hover:text-white
+transition
+text-2xl
+"
       >
         ✕
       </button>
 
-      <h2 className="text-3xl font-bold text-center mb-6">
+      <h2 className="text-3xl font-bold text-center mb-6 text-white">
         Certificate Preview
       </h2>
 
-      <div className="border-4 border-blue-600 rounded-2xl p-10 text-center">
+    <div
+  className="
+    rounded-3xl
+    border
+    border-slate-700
+    bg-slate-800/60
+    backdrop-blur-xl
+    p-10
+    text-center
+  "
+>
 
-        <h1 className="text-4xl font-black text-blue-700">
+        <h1 className="text-4xl font-black text-blue-400">
           CERTIFYPRO
         </h1>
 
-        <p className="mt-8 text-gray-500">
+        <p className="mt-8 text-slate-400">
           This certificate is proudly presented to
         </p>
 
-        <h2 className="text-5xl font-bold text-blue-600 mt-5">
+        <h2 className="text-5xl font-bold text-cyan-400 mt-5">
           {viewCertificate.studentName}
         </h2>
 
-        <p className="mt-8">
+        <p className="mt-8 text-slate-300">
           For successfully completing
         </p>
 
-        <h3 className="text-3xl font-bold mt-3">
+        <h3 className="text-3xl font-bold mt-3 text-white">
           {viewCertificate.course}
         </h3>
 
-        <p className="mt-10 font-mono">
+        <p className="mt-10 font-mono text-emerald-400 tracking-widest">
           {viewCertificate.certificateId}
         </p>
 

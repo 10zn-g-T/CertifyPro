@@ -133,9 +133,21 @@ border border-green-500/30 px-3 py-2 rounded-full text-sm font-semibold">
   {/* View - Everyone */}
                   <button
                     onClick={() => onView(certificate)}
-                    className="bg-slate-800
-hover:bg-slate-700
-text-slate-200 p-3 rounded-xl"
+                     className="
+    bg-cyan-500/20
+    hover:bg-cyan-500/30
+    text-cyan-300
+    border
+    border-cyan-500/20
+    hover:border-cyan-400/40
+    p-3
+    rounded-xl
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:shadow-lg
+    hover:shadow-cyan-500/20
+  "
                   >
                     <FiEye />
                   </button>
